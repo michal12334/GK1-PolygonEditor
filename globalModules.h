@@ -4,10 +4,11 @@
 
 class GlobalModules {
 public:
+    ~GlobalModules();
     sf::RenderWindow* GetWindow();
 
 private:
-    sf::RenderWindow* window;
+    sf::RenderWindow* window = nullptr;
     const int WINDOW_WIDTH = 1200;
     const int WINDOW_HEIGHT = 900;
 };
