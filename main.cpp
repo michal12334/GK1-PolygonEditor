@@ -1,22 +1,20 @@
 #include <SFML/Graphics.hpp>
+#include "globalModules.h"
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+int main() {
+    GlobalModules globalModules;
+    auto& window = *globalModules.GetWindow();
 
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
                 window.close();
+                break;
+            }
         }
 
         window.clear();
-        window.draw(shape);
         window.display();
     }
 
