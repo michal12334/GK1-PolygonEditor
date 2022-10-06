@@ -2,12 +2,16 @@
 #include "globalModules.h"
 #include "buttons/rectangleButton.h"
 #include "panels/upperPanel.h"
+#include "canvases/canvas.h"
+#include <cstdlib>
+#include <ctime>
 
 int main() {
+    srand(time(NULL));
     GlobalModules globalModules;
     auto window = globalModules.GetWindow();
-    Button* button = new RectangleButton(sf::Vector2f(30, 30), sf::Vector2f(10, 400), sf::Color::Red);
     auto upperPanel = new UpperPanel(sf::Vector2f(globalModules.getWindowWidth(), 40));
+    auto canvas = new Canvas(sf::Vector2i(1200, 860), sf::Vector2f(0, 40));
 
     sf::Event event;
     while (window->isOpen()) {
@@ -17,13 +21,13 @@ int main() {
             break;
         }
 
+        canvas->setPixel(rand() % 1200, rand() % 860, sf::Color::Red);
+
         window->clear();
-        window->draw(*button);
         window->draw(*upperPanel);
+        window->draw(*canvas);
         window->display();
     }
-
-    delete button;
 
     return 0;
 }
