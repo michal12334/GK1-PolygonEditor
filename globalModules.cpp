@@ -13,3 +13,7 @@ RenderWindow* GlobalModules::GetWindow() {
     }
     return window;
 }
+
+int GlobalModules::getWindowWidth() {
+    return WINDOW_WIDTH;
+}

@@ -3,7 +3,7 @@ build:
 	g++ `find -name "*.o"` -o main -lsfml-graphics -lsfml-window -lsfml-system
 
 clean:
-	rm main
+	rm main *.o
 
 .PHONY:
 	clean

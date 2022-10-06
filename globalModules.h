@@ -6,6 +6,7 @@ class GlobalModules {
 public:
     ~GlobalModules();
     sf::RenderWindow* GetWindow();
+    int getWindowWidth();
 
 private:
     sf::RenderWindow* window = nullptr;
