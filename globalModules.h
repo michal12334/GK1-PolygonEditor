@@ -5,6 +5,7 @@
 
 class GlobalModules {
 public:
+    GlobalModules();
     ~GlobalModules();
     sf::RenderWindow* GetWindow();
     int getWindowWidth();

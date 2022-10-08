@@ -1,6 +1,11 @@
 #include "globalModules.h"
+#include "usingModes/normalUsingMode.h"
 
 using namespace sf;
+
+GlobalModules::GlobalModules() {
+    usingMode = new NormalUsingMode();
+}
 
 GlobalModules::~GlobalModules() {
     if(window != nullptr)
@@ -26,5 +31,8 @@ GlobalModules::UsingModeType GlobalModules::getUsingModeType() {
 }
 
 void GlobalModules::setUsingMode(GlobalModules::UsingModeType usingModeType) {
+    if(this->usingModeType == usingModeType)
+        return;
+    
     this->usingModeType = usingModeType;
 }
