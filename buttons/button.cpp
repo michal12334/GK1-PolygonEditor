@@ -30,3 +30,11 @@ float Button::getUp() {
 float Button::getBottom() {
     return position.y + size.y;
 }
+
+void Button::setSize(sf::Vector2f size) {
+    this->size = size;
+}
+
+void Button::setPosition(sf::Vector2f position) {
+    this->position = position;
+}

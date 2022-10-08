@@ -9,6 +9,16 @@ RectangleButton::RectangleButton(Vector2f size, Vector2f position, Color color) 
     rectangle.setFillColor(color);
 }
 
+void RectangleButton::setSize(Vector2f size) {
+    Button::setSize(size);
+    rectangle.setSize(size);
+}
+
+void RectangleButton::setPosition(Vector2f position) {
+    Button::setPosition(position);
+    rectangle.setPosition(position);
+}
+
 void RectangleButton::draw(RenderTarget &target, RenderStates states) const {
     target.draw(rectangle, states);
 }

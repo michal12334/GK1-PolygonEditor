@@ -10,6 +10,8 @@ public:
     float getRight();
     float getUp();
     float getBottom();
+    virtual void setSize(sf::Vector2f size);
+    virtual void setPosition(sf::Vector2f position);
 
 protected:
     sf::Vector2f size;
