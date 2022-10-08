@@ -26,6 +26,7 @@ int main() {
         canvas->setPixel(rand() % 1200, rand() % 860, sf::Color::Red);
         editUsingMode.update();
 
+        canvas->updateTexture();
         window->clear();
         window->draw(*upperPanel);
         window->draw(*canvas);
