@@ -17,3 +17,11 @@ RenderWindow* GlobalModules::GetWindow() {
 int GlobalModules::getWindowWidth() {
     return WINDOW_WIDTH;
 }
+
+GlobalModules::UsingMode GlobalModules::getUsingMode() {
+    return usingMode;
+}
+
+void GlobalModules::setUsingMode(GlobalModules::UsingMode usingMode) {
+    this->usingMode = usingMode;
+}
