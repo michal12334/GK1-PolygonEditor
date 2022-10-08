@@ -1,5 +1,6 @@
 #include "globalModules.h"
 #include "usingModes/normalUsingMode.h"
+#include "usingModes/editUsingMode.h"
 
 using namespace sf;
 
@@ -35,4 +36,14 @@ void GlobalModules::setUsingMode(GlobalModules::UsingModeType usingModeType) {
         return;
     
     this->usingModeType = usingModeType;
+    delete usingMode;
+    switch(usingModeType) {
+        case UsingModeType::normal:
+            usingMode = new NormalUsingMode();
+            break;
+
+        case UsingModeType::edit:
+            usingMode = new EditUsingMode();
+            break;
+    }
 }
