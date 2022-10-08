@@ -15,6 +15,10 @@ void EditUsingMode::update() {
     if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = true;
         pointDrawer.draw(canvas, mousePositionOnCanvas);
+        if(previousPoint.x != -1) {
+            lineDrawer.draw(canvas, previousPoint, mousePositionOnCanvas);
+        }
+        previousPoint = mousePositionOnCanvas;
     } else if(!Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = false;
     }

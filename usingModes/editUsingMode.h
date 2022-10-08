@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "../canvases/canvas.h"
 #include "../drawers/pointDrawer.h"
+#include "../drawers/lineDrawer.h"
 
 class EditUsingMode : public UsingMode {
 public:
@@ -16,4 +17,6 @@ private:
 
     bool isMouseLeftButtonPressed = false;
     PointDrawer pointDrawer{5};
+    LineDrawer lineDrawer{2};
+    sf::Vector2i previousPoint{-1, -1};
 };
