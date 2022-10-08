@@ -1,8 +1,6 @@
 #include "lineDrawer.h"
-#include <iostream>
 
 using namespace sf;
-using namespace std;
 
 LineDrawer::LineDrawer(int thickness) {
     this->thickness = thickness;
@@ -35,10 +33,8 @@ void LineDrawer::bresenham1(Canvas* canvas, Vector2i startPoint, Vector2i finish
     int incrNE = 2 * (dy - dx);
     int x = startPoint.x;
     int y = startPoint.y;
-    cout << x << endl;
     drawSquare12(canvas, x, y);
     while(x < finishPoint.x) {
-        cout << x << endl;
         if(d < 0) {
             d += incrE;
             x += thickness;
@@ -57,10 +53,8 @@ void LineDrawer::bresenham2(Canvas* canvas, Vector2i startPoint, Vector2i finish
     int incrNE = 2 * (dx - dy);
     int x = startPoint.x;
     int y = startPoint.y;
-    cout << x << endl;
     drawSquare12(canvas, x, y);
     while(y < finishPoint.y) {
-        cout << x << endl;
         if(d < 0) {
             d += incrE;
             y += thickness;
@@ -79,10 +73,8 @@ void LineDrawer::bresenham3(Canvas* canvas, Vector2i startPoint, Vector2i finish
     int incrNE = 2 * (dy + dx);
     int x = startPoint.x;
     int y = startPoint.y;
-    cout << x << endl;
     drawSquare34(canvas, x, y);
     while(x > finishPoint.x) {
-        cout << x << endl;
         if(d < 0) {
             d += incrE;
             x -= thickness;
@@ -101,10 +93,8 @@ void LineDrawer::bresenham4(Canvas* canvas, Vector2i startPoint, Vector2i finish
     int incrNE = 2 * (-dx - dy);
     int x = startPoint.x;
     int y = startPoint.y;
-    cout << x << endl;
     drawSquare34(canvas, x, y);
     while(y < finishPoint.y) {
-        cout << x << endl;
         if(d < 0) {
             d += incrE;
             y += thickness;
@@ -123,10 +113,8 @@ void LineDrawer::bresenham5(Canvas* canvas, Vector2i startPoint, Vector2i finish
     int incrNE = 2 * (-dy - dx);
     int x = startPoint.x;
     int y = startPoint.y;
-    cout << x << endl;
     drawSquare56(canvas, x, y);
     while(x < finishPoint.x) {
-        cout << x << endl;
         if(d < 0) {
             d += incrE;
             x += thickness;
@@ -145,10 +133,8 @@ void LineDrawer::bresenham6(Canvas* canvas, Vector2i startPoint, Vector2i finish
     int incrNE = 2 * (dx + dy);
     int x = startPoint.x;
     int y = startPoint.y;
-    cout << x << endl;
     drawSquare56(canvas, x, y);
     while(y > finishPoint.y) {
-        cout << x << endl;
         if(d < 0) {
             d += incrE;
             y -= thickness;
@@ -167,10 +153,8 @@ void LineDrawer::bresenham7(Canvas* canvas, Vector2i startPoint, Vector2i finish
     int incrNE = 2 * (-dy + dx);
     int x = startPoint.x;
     int y = startPoint.y;
-    cout << x << endl;
     drawSquare78(canvas, x, y);
     while(x > finishPoint.x) {
-        cout << x << endl;
         if(d < 0) {
             d += incrE;
             x -= thickness;
@@ -189,10 +173,8 @@ void LineDrawer::bresenham8(Canvas* canvas, Vector2i startPoint, Vector2i finish
     int incrNE = 2 * (-dx + dy);
     int x = startPoint.x;
     int y = startPoint.y;
-    cout << x << endl;
     drawSquare78(canvas, x, y);
     while(y > finishPoint.y) {
-        cout << x << endl;
         if(d < 0) {
             d += incrE;
             y -= thickness;
