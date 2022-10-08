@@ -43,7 +43,7 @@ void GlobalModules::setUsingMode(GlobalModules::UsingModeType usingModeType) {
             break;
 
         case UsingModeType::edit:
-            usingMode = new EditUsingMode();
+            //usingMode = new EditUsingMode();
             break;
     }
 }

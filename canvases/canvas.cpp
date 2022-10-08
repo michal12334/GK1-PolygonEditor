@@ -16,6 +16,10 @@ void Canvas::setPixel(int x, int y, Color color) {
     texture.loadFromImage(image);
 }
 
+Vector2f Canvas::getPosition() {
+    return position;
+}
+
 void Canvas::draw(RenderTarget &target, RenderStates states) const {
     target.draw(sprite, states);
 }

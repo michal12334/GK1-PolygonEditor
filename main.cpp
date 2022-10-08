@@ -5,6 +5,7 @@
 #include "canvases/canvas.h"
 #include <cstdlib>
 #include <ctime>
+#include "usingModes/editUsingMode.h"
 
 int main() {
     srand(time(NULL));
@@ -12,6 +13,7 @@ int main() {
     auto window = globalModules.GetWindow();
     auto upperPanel = new UpperPanel(sf::Vector2f(globalModules.getWindowWidth(), 40));
     auto canvas = new Canvas(sf::Vector2i(1200, 860), sf::Vector2f(0, 40));
+    EditUsingMode editUsingMode(window, canvas);
 
     sf::Event event;
     while (window->isOpen()) {
@@ -22,6 +24,7 @@ int main() {
         }
 
         canvas->setPixel(rand() % 1200, rand() % 860, sf::Color::Red);
+        editUsingMode.update();
 
         window->clear();
         window->draw(*upperPanel);
