@@ -5,6 +5,9 @@ using namespace sf;
 GlobalModules::~GlobalModules() {
     if(window != nullptr)
         delete window;
+
+    if(usingMode != nullptr)
+        delete usingMode;
 }
 
 RenderWindow* GlobalModules::GetWindow() {
@@ -18,10 +21,10 @@ int GlobalModules::getWindowWidth() {
     return WINDOW_WIDTH;
 }
 
-GlobalModules::UsingMode GlobalModules::getUsingMode() {
-    return usingMode;
+GlobalModules::UsingModeType GlobalModules::getUsingModeType() {
+    return usingModeType;
 }
 
-void GlobalModules::setUsingMode(GlobalModules::UsingMode usingMode) {
-    this->usingMode = usingMode;
+void GlobalModules::setUsingMode(GlobalModules::UsingModeType usingModeType) {
+    this->usingModeType = usingModeType;
 }
