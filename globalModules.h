@@ -6,6 +6,7 @@
 #include "canvases/canvas.h"
 #include "drawers/lineDrawer.h"
 #include "drawers/pointDrawer.h"
+#include "polygons/polygonsContainer.h"
 
 class GlobalModules {
 public:
@@ -17,6 +18,7 @@ public:
     Canvas* getCanvas();
     LineDrawer* getLineDrawer();
     PointDrawer* getPointDrawer();
+    PolygonsContainer* getPolygonsContainer();
 
     enum class UsingModeType {
         normal,
@@ -39,4 +41,5 @@ private:
     Canvas* canvas = nullptr;
     LineDrawer* lineDrawer = nullptr;
     PointDrawer* pointDrawer = nullptr;
+    PolygonsContainer* polygonsContainer = nullptr;
 };

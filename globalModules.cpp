@@ -26,6 +26,9 @@ GlobalModules::~GlobalModules() {
 
     if(pointDrawer != nullptr)
         delete pointDrawer;
+
+    if(polygonsContainer != nullptr)
+        delete polygonsContainer;
 }
 
 RenderWindow* GlobalModules::GetWindow() {
@@ -65,6 +68,13 @@ PointDrawer* GlobalModules::getPointDrawer() {
         pointDrawer = new PointDrawer(getCanvas(), 5);
 
     return pointDrawer;
+}
+
+PolygonsContainer* GlobalModules::getPolygonsContainer() {
+    if(polygonsContainer == nullptr)
+        polygonsContainer = new PolygonsContainer(lineDrawer, pointDrawer);
+
+    return polygonsContainer;
 }
 
 GlobalModules::UsingModeType GlobalModules::getUsingModeType() {
