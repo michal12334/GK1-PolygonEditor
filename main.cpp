@@ -17,12 +17,6 @@ int main() {
 
     sf::Event event;
     while (window->isOpen()) {
-        window->pollEvent(event);
-        if (event.type == sf::Event::Closed) {
-            window->close();
-            break;
-        }
-
         canvas->setPixel(rand() % 1200, rand() % 860, sf::Color::Red);
         editUsingMode.update();
 
@@ -31,6 +25,10 @@ int main() {
         window->draw(*upperPanel);
         window->draw(*canvas);
         window->display();
+
+        while(window->pollEvent(event))
+            if (event.type == sf::Event::Closed)
+                window->close();
     }
 
     return 0;
