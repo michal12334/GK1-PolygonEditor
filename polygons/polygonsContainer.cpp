@@ -15,3 +15,9 @@ void PolygonsContainer::addPolygon(Polygon polygon) {
 void PolygonsContainer::addPolygon(vector<Vector2i> points) {
     addPolygon(Polygon(points, pointDrawer, lineDrawer));
 }
+
+void PolygonsContainer::draw() {
+    for(auto& p : polygons) {
+        p.draw();
+    }
+}

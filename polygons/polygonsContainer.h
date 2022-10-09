@@ -11,6 +11,7 @@ public:
     PolygonsContainer(LineDrawer* lineDrawer, PointDrawer* pointDrawer);
     void addPolygon(Polygon polygon);
     void addPolygon(std::vector<sf::Vector2i> points);
+    void draw();
 
 private:
     std::vector<Polygon> polygons;
