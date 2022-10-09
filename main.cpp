@@ -3,12 +3,9 @@
 #include "buttons/rectangleButton.h"
 #include "panels/upperPanel.h"
 #include "canvases/canvas.h"
-#include <cstdlib>
-#include <ctime>
 #include "usingModes/editUsingMode.h"
 
 int main() {
-    srand(time(NULL));
     GlobalModules globalModules;
     auto window = globalModules.GetWindow();
     auto upperPanel = globalModules.getUpperPanel();
@@ -18,7 +15,6 @@ int main() {
 
     sf::Event event;
     while (window->isOpen()) {
-        canvas->setPixel(rand() % 1200, rand() % 860, sf::Color::Red);
         editUsingMode.update();
 
         window->clear();
