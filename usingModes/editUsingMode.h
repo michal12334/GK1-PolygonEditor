@@ -9,7 +9,7 @@
 
 class EditUsingMode : public UsingMode {
 public:
-    EditUsingMode(sf::Window* window, Canvas* canvas);
+    EditUsingMode(sf::Window* window, Canvas* canvas, PointDrawer* pointDrawer, LineDrawer* lineDrawer);
     virtual void update() override;
 
 private:
@@ -19,8 +19,8 @@ private:
     Canvas* canvas;
 
     bool isMouseLeftButtonPressed = false;
-    PointDrawer pointDrawer{5};
-    LineDrawer lineDrawer{2};
+    PointDrawer* pointDrawer;
+    LineDrawer* lineDrawer;
     bool isPolygonBeingDrawn = false;
     std::vector<sf::Vector2i> points;
 };

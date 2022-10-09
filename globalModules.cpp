@@ -14,6 +14,18 @@ GlobalModules::~GlobalModules() {
 
     if(usingMode != nullptr)
         delete usingMode;
+
+    if(upperPanel != nullptr)
+        delete upperPanel;
+
+    if(canvas != nullptr)
+        delete canvas;
+
+    if(lineDrawer != nullptr)
+        delete lineDrawer;
+
+    if(pointDrawer != nullptr)
+        delete pointDrawer;
 }
 
 RenderWindow* GlobalModules::GetWindow() {
@@ -25,6 +37,34 @@ RenderWindow* GlobalModules::GetWindow() {
 
 int GlobalModules::getWindowWidth() {
     return WINDOW_WIDTH;
+}
+
+UpperPanel* GlobalModules::getUpperPanel() {
+    if(upperPanel == nullptr)
+        upperPanel = new UpperPanel(Vector2f(getWindowWidth(), 40));
+
+    return upperPanel;
+}
+
+Canvas* GlobalModules::getCanvas() {
+    if(canvas == nullptr)
+        canvas = new Canvas(sf::Vector2i(1200, 860), sf::Vector2f(0, 40));
+
+    return canvas;
+}
+
+LineDrawer* GlobalModules::getLineDrawer() {
+    if(lineDrawer == nullptr)
+        lineDrawer = new LineDrawer(getCanvas(), 2);
+
+    return lineDrawer;
+}
+
+PointDrawer* GlobalModules::getPointDrawer() {
+    if(pointDrawer == nullptr)
+        pointDrawer = new PointDrawer(getCanvas(), 5);
+
+    return pointDrawer;
 }
 
 GlobalModules::UsingModeType GlobalModules::getUsingModeType() {

@@ -2,38 +2,39 @@
 
 using namespace sf;
 
-LineDrawer::LineDrawer(int thickness) {
+LineDrawer::LineDrawer(Canvas* canvas, int thickness) {
     this->thickness = thickness;
+    this->canvas = canvas;
 }
 
-void LineDrawer::draw(Canvas* canvas, Vector2i startPoint, Vector2i finishPoint) {
+void LineDrawer::draw(Vector2i startPoint, Vector2i finishPoint) {
     int dx = finishPoint.x - startPoint.x;
     int dy = finishPoint.y - startPoint.y;
     if(dx >= 0 && dy >= 0 && dx >= dy)
-        bresenham1(canvas, startPoint, finishPoint, dx, dy);
+        bresenham1(startPoint, finishPoint, dx, dy);
     else if(dx >= 0 && dy >= 0 && dx < dy)
-        bresenham2(canvas, startPoint, finishPoint, dx, dy);
+        bresenham2(startPoint, finishPoint, dx, dy);
     else if(dx < 0 && dy >= 0 && -dx >= dy)
-        bresenham3(canvas, startPoint, finishPoint, dx, dy);
+        bresenham3(startPoint, finishPoint, dx, dy);
     else if(dx < 0 && dy >= 0 && -dx < dy)
-        bresenham4(canvas, startPoint, finishPoint, dx, dy);
+        bresenham4(startPoint, finishPoint, dx, dy);
     else if(dx >= 0 && dy < 0 && dx >= -dy)
-        bresenham5(canvas, startPoint, finishPoint, dx, dy);
+        bresenham5(startPoint, finishPoint, dx, dy);
     else if(dx >= 0 && dy < 0 && dx < -dy)
-        bresenham6(canvas, startPoint, finishPoint, dx, dy);
+        bresenham6(startPoint, finishPoint, dx, dy);
     else if(dx < 0 && dy < 0 && -dx >= -dy)
-        bresenham7(canvas, startPoint, finishPoint, dx, dy);
+        bresenham7(startPoint, finishPoint, dx, dy);
     else if(dx < 0 && dy < 0 && -dx < -dy)
-        bresenham8(canvas, startPoint, finishPoint, dx, dy);
+        bresenham8(startPoint, finishPoint, dx, dy);
 }
 
-void LineDrawer::bresenham1(Canvas* canvas, Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
+void LineDrawer::bresenham1(Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
     int d = 2 * dy - dx;
     int incrE = 2 * dy;
     int incrNE = 2 * (dy - dx);
     int x = startPoint.x;
     int y = startPoint.y;
-    drawSquare12(canvas, x, y);
+    drawSquare12(x, y);
     while(x < finishPoint.x) {
         if(d < 0) {
             d += incrE;
@@ -43,17 +44,17 @@ void LineDrawer::bresenham1(Canvas* canvas, Vector2i startPoint, Vector2i finish
             x += thickness;
             y += thickness;
         }
-        drawSquare12(canvas, x, y);
+        drawSquare12(x, y);
     }
 }
 
-void LineDrawer::bresenham2(Canvas* canvas, Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
+void LineDrawer::bresenham2(Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
     int d = 2 * dx - dy;
     int incrE = 2 * dx;
     int incrNE = 2 * (dx - dy);
     int x = startPoint.x;
     int y = startPoint.y;
-    drawSquare12(canvas, x, y);
+    drawSquare12(x, y);
     while(y < finishPoint.y) {
         if(d < 0) {
             d += incrE;
@@ -63,17 +64,17 @@ void LineDrawer::bresenham2(Canvas* canvas, Vector2i startPoint, Vector2i finish
             x += thickness;
             y += thickness;
         }
-        drawSquare12(canvas, x, y);
+        drawSquare12(x, y);
     }
 }
 
-void LineDrawer::bresenham3(Canvas* canvas, Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
+void LineDrawer::bresenham3(Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
     int d = 2 * dy + dx;
     int incrE = 2 * dy;
     int incrNE = 2 * (dy + dx);
     int x = startPoint.x;
     int y = startPoint.y;
-    drawSquare34(canvas, x, y);
+    drawSquare34(x, y);
     while(x > finishPoint.x) {
         if(d < 0) {
             d += incrE;
@@ -83,17 +84,17 @@ void LineDrawer::bresenham3(Canvas* canvas, Vector2i startPoint, Vector2i finish
             x -= thickness;
             y += thickness;
         }
-        drawSquare34(canvas, x, y);
+        drawSquare34(x, y);
     }
 }
 
-void LineDrawer::bresenham4(Canvas* canvas, Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
+void LineDrawer::bresenham4(Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
     int d = -2 * dx - dy;
     int incrE = -2 * dx;
     int incrNE = 2 * (-dx - dy);
     int x = startPoint.x;
     int y = startPoint.y;
-    drawSquare34(canvas, x, y);
+    drawSquare34(x, y);
     while(y < finishPoint.y) {
         if(d < 0) {
             d += incrE;
@@ -103,17 +104,17 @@ void LineDrawer::bresenham4(Canvas* canvas, Vector2i startPoint, Vector2i finish
             x -= thickness;
             y += thickness;
         }
-        drawSquare34(canvas, x, y);
+        drawSquare34(x, y);
     }
 }
 
-void LineDrawer::bresenham5(Canvas* canvas, Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
+void LineDrawer::bresenham5(Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
     int d = -2 * dy - dx;
     int incrE = -2 * dy;
     int incrNE = 2 * (-dy - dx);
     int x = startPoint.x;
     int y = startPoint.y;
-    drawSquare56(canvas, x, y);
+    drawSquare56(x, y);
     while(x < finishPoint.x) {
         if(d < 0) {
             d += incrE;
@@ -123,17 +124,17 @@ void LineDrawer::bresenham5(Canvas* canvas, Vector2i startPoint, Vector2i finish
             x += thickness;
             y -= thickness;
         }
-        drawSquare56(canvas, x, y);
+        drawSquare56(x, y);
     }
 }
 
-void LineDrawer::bresenham6(Canvas* canvas, Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
+void LineDrawer::bresenham6(Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
     int d = 2 * dx + dy;
     int incrE = 2 * dx;
     int incrNE = 2 * (dx + dy);
     int x = startPoint.x;
     int y = startPoint.y;
-    drawSquare56(canvas, x, y);
+    drawSquare56(x, y);
     while(y > finishPoint.y) {
         if(d < 0) {
             d += incrE;
@@ -143,17 +144,17 @@ void LineDrawer::bresenham6(Canvas* canvas, Vector2i startPoint, Vector2i finish
             x += thickness;
             y -= thickness;
         }
-        drawSquare56(canvas, x, y);
+        drawSquare56(x, y);
     }
 }
 
-void LineDrawer::bresenham7(Canvas* canvas, Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
+void LineDrawer::bresenham7(Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
     int d = -2 * dy + dx;
     int incrE = -2 * dy;
     int incrNE = 2 * (-dy + dx);
     int x = startPoint.x;
     int y = startPoint.y;
-    drawSquare78(canvas, x, y);
+    drawSquare78(x, y);
     while(x > finishPoint.x) {
         if(d < 0) {
             d += incrE;
@@ -163,17 +164,17 @@ void LineDrawer::bresenham7(Canvas* canvas, Vector2i startPoint, Vector2i finish
             x -= thickness;
             y -= thickness;
         }
-        drawSquare78(canvas, x, y);
+        drawSquare78(x, y);
     }
 }
 
-void LineDrawer::bresenham8(Canvas* canvas, Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
+void LineDrawer::bresenham8(Vector2i startPoint, Vector2i finishPoint, int dx, int dy) {
     int d = -2 * dx + dy;
     int incrE = -2 * dx;
     int incrNE = 2 * (-dx + dy);
     int x = startPoint.x;
     int y = startPoint.y;
-    drawSquare78(canvas, x, y);
+    drawSquare78(x, y);
     while(y > finishPoint.y) {
         if(d < 0) {
             d += incrE;
@@ -183,11 +184,11 @@ void LineDrawer::bresenham8(Canvas* canvas, Vector2i startPoint, Vector2i finish
             x -= thickness;
             y -= thickness;
         }
-        drawSquare78(canvas, x, y);
+        drawSquare78(x, y);
     }
 }
 
-void LineDrawer::drawSquare12(Canvas* canvas, int x, int y) {
+void LineDrawer::drawSquare12(int x, int y) {
     #pragma omp parallel for
     for(int xx = x; xx < x + thickness; xx++) {
         #pragma omp parallel for
@@ -197,7 +198,7 @@ void LineDrawer::drawSquare12(Canvas* canvas, int x, int y) {
     }
 }
 
-void LineDrawer::drawSquare34(Canvas* canvas, int x, int y) {
+void LineDrawer::drawSquare34(int x, int y) {
     #pragma omp parallel for
     for(int xx = x; xx > x - thickness; xx--) {
         #pragma omp parallel for
@@ -207,7 +208,7 @@ void LineDrawer::drawSquare34(Canvas* canvas, int x, int y) {
     }
 }
 
-void LineDrawer::drawSquare56(Canvas* canvas, int x, int y) {
+void LineDrawer::drawSquare56(int x, int y) {
     #pragma omp parallel for
     for(int xx = x; xx < x + thickness; xx++) {
         #pragma omp parallel for
@@ -217,7 +218,7 @@ void LineDrawer::drawSquare56(Canvas* canvas, int x, int y) {
     }
 }
 
-void LineDrawer::drawSquare78(Canvas* canvas, int x, int y) {
+void LineDrawer::drawSquare78(int x, int y) {
     #pragma omp parallel for
     for(int xx = x; xx > x - thickness; xx--) {
         #pragma omp parallel for

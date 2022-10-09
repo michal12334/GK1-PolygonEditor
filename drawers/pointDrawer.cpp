@@ -2,11 +2,12 @@
 
 using namespace sf;
 
-PointDrawer::PointDrawer(int radius) {
+PointDrawer::PointDrawer(Canvas* canvas, int radius) {
     this->radius = radius;
+    this->canvas = canvas;
 }
 
-void PointDrawer::draw(Canvas* canvas, Vector2i position) {
+void PointDrawer::draw(Vector2i position) {
     for(int x = position.x - radius; x <= position.x + radius; x++) {
         for(int y = position.y - radius; y <= position.y + radius; y++) {
             canvas->setPixel(x, y, Color::Black);

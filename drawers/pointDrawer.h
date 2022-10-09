@@ -5,9 +5,10 @@
 
 class PointDrawer {
 public:
-    PointDrawer(int radius);
-    void draw(Canvas* canvas, sf::Vector2i position);
+    PointDrawer(Canvas* canvas, int radius);
+    void draw(sf::Vector2i position);
 
 private:
     int radius;
+    Canvas* canvas;
 };

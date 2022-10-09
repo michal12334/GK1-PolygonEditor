@@ -2,9 +2,11 @@
 
 using namespace sf;
 
-EditUsingMode::EditUsingMode(Window* window, Canvas* canvas) {
+EditUsingMode::EditUsingMode(Window* window, Canvas* canvas, PointDrawer* pointDrawer, LineDrawer* lineDrawer) {
     this->window = window;
     this->canvas = canvas;
+    this->pointDrawer = pointDrawer;
+    this->lineDrawer = lineDrawer;
 }
 
 void EditUsingMode::update() {
@@ -15,13 +17,13 @@ void EditUsingMode::update() {
     if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = true;
         if(points.size() >= 2 && isMouseOnFirstPoint(mousePositionOnCanvas)) {
-            lineDrawer.draw(canvas, points[points.size() - 1], points[0]);
+            lineDrawer->draw(points[points.size() - 1], points[0]);
             isPolygonBeingDrawn = false;
             points.clear();
         } else {
-            pointDrawer.draw(canvas, mousePositionOnCanvas);
+            pointDrawer->draw(mousePositionOnCanvas);
             if(isPolygonBeingDrawn) {
-                lineDrawer.draw(canvas, points[points.size() - 1], mousePositionOnCanvas);
+                lineDrawer->draw(points[points.size() - 1], mousePositionOnCanvas);
             }
             points.push_back(mousePositionOnCanvas);
             isPolygonBeingDrawn = true;

@@ -11,9 +11,9 @@ int main() {
     srand(time(NULL));
     GlobalModules globalModules;
     auto window = globalModules.GetWindow();
-    auto upperPanel = new UpperPanel(sf::Vector2f(globalModules.getWindowWidth(), 40));
-    auto canvas = new Canvas(sf::Vector2i(1200, 860), sf::Vector2f(0, 40));
-    EditUsingMode editUsingMode(window, canvas);
+    auto upperPanel = globalModules.getUpperPanel();
+    auto canvas = globalModules.getCanvas();
+    EditUsingMode editUsingMode(window, canvas, globalModules.getPointDrawer(), globalModules.getLineDrawer());
 
     sf::Event event;
     while (window->isOpen()) {
