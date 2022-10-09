@@ -2,11 +2,12 @@
 
 using namespace sf;
 
-EditUsingMode::EditUsingMode(Window* window, Canvas* canvas, PointDrawer* pointDrawer, LineDrawer* lineDrawer) {
+EditUsingMode::EditUsingMode(Window* window, Canvas* canvas, PointDrawer* pointDrawer, LineDrawer* lineDrawer, PolygonsContainer* polygonsContainer) {
     this->window = window;
     this->canvas = canvas;
     this->pointDrawer = pointDrawer;
     this->lineDrawer = lineDrawer;
+    this->polygonsContainer = polygonsContainer;
 }
 
 void EditUsingMode::update() {
@@ -24,6 +25,7 @@ void EditUsingMode::update() {
         if(points.size() >= 2 && isMouseOnFirstPoint(mousePositionOnCanvas)) {
             lineDrawer->draw(points[points.size() - 1], points[0]);
             isPolygonBeingDrawn = false;
+            polygonsContainer->addPolygon(points);
             points.clear();
         } else {
             pointDrawer->draw(mousePositionOnCanvas);

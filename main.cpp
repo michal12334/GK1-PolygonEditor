@@ -13,7 +13,7 @@ int main() {
     auto window = globalModules.GetWindow();
     auto upperPanel = globalModules.getUpperPanel();
     auto canvas = globalModules.getCanvas();
-    EditUsingMode editUsingMode(window, canvas, globalModules.getPointDrawer(), globalModules.getLineDrawer());
+    EditUsingMode editUsingMode(window, canvas, globalModules.getPointDrawer(), globalModules.getLineDrawer(), globalModules.getPolygonsContainer());
 
     sf::Event event;
     while (window->isOpen()) {

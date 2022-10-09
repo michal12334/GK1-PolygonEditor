@@ -6,10 +6,11 @@
 #include "../drawers/pointDrawer.h"
 #include "../drawers/lineDrawer.h"
 #include <vector>
+#include "../polygons/polygonsContainer.h"
 
 class EditUsingMode : public UsingMode {
 public:
-    EditUsingMode(sf::Window* window, Canvas* canvas, PointDrawer* pointDrawer, LineDrawer* lineDrawer);
+    EditUsingMode(sf::Window* window, Canvas* canvas, PointDrawer* pointDrawer, LineDrawer* lineDrawer, PolygonsContainer* polygonsContainer);
     virtual void update() override;
 
 private:
@@ -17,10 +18,10 @@ private:
 
     sf::Window* window;
     Canvas* canvas;
-
     bool isMouseLeftButtonPressed = false;
     PointDrawer* pointDrawer;
     LineDrawer* lineDrawer;
     bool isPolygonBeingDrawn = false;
     std::vector<sf::Vector2i> points;
+    PolygonsContainer* polygonsContainer;
 };
