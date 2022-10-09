@@ -7,6 +7,7 @@ public:
     Canvas(sf::Vector2i size, sf::Vector2f position);
     void setPixel(int x, int y, sf::Color color);
     sf::Vector2f getPosition();
+    sf::Vector2i getSize();
     void updateTexture();
 
 private:

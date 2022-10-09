@@ -22,6 +22,10 @@ Vector2f Canvas::getPosition() {
     return position;
 }
 
+Vector2i Canvas::getSize() {
+    return size;
+}
+
 void Canvas::updateTexture() {
     texture.loadFromImage(image);
 }

@@ -13,6 +13,11 @@ void EditUsingMode::update() {
     auto canvasPosition = canvas->getPosition();
     auto mousePosition = Mouse::getPosition(*window);
     auto mousePositionOnCanvas = Vector2i(mousePosition.x - canvasPosition.x, mousePosition.y - canvasPosition.y);
+    if(mousePositionOnCanvas.x < 0 ||
+        mousePositionOnCanvas.y < 0 ||
+        mousePositionOnCanvas.x >= canvas->getSize().x ||
+        mousePositionOnCanvas.y >= canvas->getSize().y)
+            return;
 
     if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = true;
