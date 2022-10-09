@@ -47,7 +47,6 @@ void EditUsingMode::draw() {
     auto mousePositionOnCanvas = getMousePositionOnCanvas();
     pointDrawer->draw(mousePositionOnCanvas);
     lineDrawer->draw(points[points.size() - 1], mousePositionOnCanvas);
-    lineDrawer->draw(mousePositionOnCanvas, points[0]);
 }
 
 bool EditUsingMode::isMouseOnFirstPoint(Vector2i mousePosition) {
