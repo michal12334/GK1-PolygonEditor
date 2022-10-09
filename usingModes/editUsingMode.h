@@ -5,6 +5,7 @@
 #include "../canvases/canvas.h"
 #include "../drawers/pointDrawer.h"
 #include "../drawers/lineDrawer.h"
+#include <vector>
 
 class EditUsingMode : public UsingMode {
 public:
@@ -12,11 +13,14 @@ public:
     virtual void update() override;
 
 private:
+    bool isMouseOnFirstPoint(sf::Vector2i mousePosition);
+
     sf::Window* window;
     Canvas* canvas;
 
     bool isMouseLeftButtonPressed = false;
     PointDrawer pointDrawer{5};
     LineDrawer lineDrawer{2};
-    sf::Vector2i previousPoint{-1, -1};
+    bool isPolygonBeingDrawn = false;
+    std::vector<sf::Vector2i> points;
 };

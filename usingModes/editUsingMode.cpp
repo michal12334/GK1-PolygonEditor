@@ -14,12 +14,30 @@ void EditUsingMode::update() {
 
     if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = true;
-        pointDrawer.draw(canvas, mousePositionOnCanvas);
-        if(previousPoint.x != -1) {
-            lineDrawer.draw(canvas, previousPoint, mousePositionOnCanvas);
+        if(points.size() >= 2 && isMouseOnFirstPoint(mousePositionOnCanvas)) {
+            lineDrawer.draw(canvas, points[points.size() - 1], points[0]);
+            isPolygonBeingDrawn = false;
+            points.clear();
+        } else {
+            pointDrawer.draw(canvas, mousePositionOnCanvas);
+            if(isPolygonBeingDrawn) {
+                lineDrawer.draw(canvas, points[points.size() - 1], mousePositionOnCanvas);
+            }
+            points.push_back(mousePositionOnCanvas);
+            isPolygonBeingDrawn = true;
         }
-        previousPoint = mousePositionOnCanvas;
     } else if(!Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = false;
     }
+}
+
+bool EditUsingMode::isMouseOnFirstPoint(Vector2i mousePosition) {
+    if(points.size() == 0)
+        return false;
+
+    auto firstPointPosition = points[0];
+    int d2 = (mousePosition.x - firstPointPosition.x) * (mousePosition.x - firstPointPosition.x) +
+        (mousePosition.y - firstPointPosition.y) * (mousePosition.y - firstPointPosition.y);
+
+    return d2 <= 6*6;
 }
