@@ -72,7 +72,7 @@ PointDrawer* GlobalModules::getPointDrawer() {
 
 PolygonsContainer* GlobalModules::getPolygonsContainer() {
     if(polygonsContainer == nullptr)
-        polygonsContainer = new PolygonsContainer(lineDrawer, pointDrawer);
+        polygonsContainer = new PolygonsContainer(getLineDrawer(), getPointDrawer());
 
     return polygonsContainer;
 }
