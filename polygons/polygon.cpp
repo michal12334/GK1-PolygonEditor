@@ -11,7 +11,7 @@ Polygon::Polygon(const vector<Vector2i>& points, PointDrawer* pointDrawer, LineD
 
 void Polygon::draw() {
     for(int i = 0; i < points.size(); i++) {
-        pointDrawer->draw(points[0]);
+        pointDrawer->draw(points[i]);
         lineDrawer->draw(points[i], points[(i + 1) % points.size()]);
     }
 }

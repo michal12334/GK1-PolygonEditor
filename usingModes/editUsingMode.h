@@ -12,9 +12,11 @@ class EditUsingMode : public UsingMode {
 public:
     EditUsingMode(sf::Window* window, Canvas* canvas, PointDrawer* pointDrawer, LineDrawer* lineDrawer, PolygonsContainer* polygonsContainer);
     virtual void update() override;
+    void draw();
 
 private:
     bool isMouseOnFirstPoint(sf::Vector2i mousePosition);
+    sf::Vector2i getMousePositionOnCanvas();
 
     sf::Window* window;
     Canvas* canvas;

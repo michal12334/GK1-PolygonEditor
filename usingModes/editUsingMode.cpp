@@ -11,9 +11,7 @@ EditUsingMode::EditUsingMode(Window* window, Canvas* canvas, PointDrawer* pointD
 }
 
 void EditUsingMode::update() {
-    auto canvasPosition = canvas->getPosition();
-    auto mousePosition = Mouse::getPosition(*window);
-    auto mousePositionOnCanvas = Vector2i(mousePosition.x - canvasPosition.x, mousePosition.y - canvasPosition.y);
+    auto mousePositionOnCanvas = getMousePositionOnCanvas();
     if(mousePositionOnCanvas.x < 0 ||
         mousePositionOnCanvas.y < 0 ||
         mousePositionOnCanvas.x >= canvas->getSize().x ||
@@ -23,21 +21,33 @@ void EditUsingMode::update() {
     if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = true;
         if(points.size() >= 2 && isMouseOnFirstPoint(mousePositionOnCanvas)) {
-            lineDrawer->draw(points[points.size() - 1], points[0]);
             isPolygonBeingDrawn = false;
             polygonsContainer->addPolygon(points);
             points.clear();
         } else {
-            pointDrawer->draw(mousePositionOnCanvas);
-            if(isPolygonBeingDrawn) {
-                lineDrawer->draw(points[points.size() - 1], mousePositionOnCanvas);
-            }
             points.push_back(mousePositionOnCanvas);
             isPolygonBeingDrawn = true;
         }
     } else if(!Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = false;
     }
+}
+
+void EditUsingMode::draw() {
+    if(points.size() == 0)
+        return;
+
+    for(int i = 0; i < points.size(); i++) {
+        pointDrawer->draw(points[i]);
+        if(i != points.size() - 1) {
+            lineDrawer->draw(points[i], points[i + 1]);
+        }
+    }
+
+    auto mousePositionOnCanvas = getMousePositionOnCanvas();
+    pointDrawer->draw(mousePositionOnCanvas);
+    lineDrawer->draw(points[points.size() - 1], mousePositionOnCanvas);
+    lineDrawer->draw(mousePositionOnCanvas, points[0]);
 }
 
 bool EditUsingMode::isMouseOnFirstPoint(Vector2i mousePosition) {
@@ -49,4 +59,10 @@ bool EditUsingMode::isMouseOnFirstPoint(Vector2i mousePosition) {
         (mousePosition.y - firstPointPosition.y) * (mousePosition.y - firstPointPosition.y);
 
     return d2 <= 6*6;
+}
+
+Vector2i EditUsingMode::getMousePositionOnCanvas() {
+    auto canvasPosition = canvas->getPosition();
+    auto mousePosition = Mouse::getPosition(*window);
+    return Vector2i(mousePosition.x - canvasPosition.x, mousePosition.y - canvasPosition.y);
 }

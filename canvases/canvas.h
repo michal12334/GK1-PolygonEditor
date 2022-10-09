@@ -9,6 +9,7 @@ public:
     sf::Vector2f getPosition();
     sf::Vector2i getSize();
     void updateTexture();
+    void clear();
 
 private:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;

@@ -13,6 +13,7 @@ int main() {
     auto window = globalModules.GetWindow();
     auto upperPanel = globalModules.getUpperPanel();
     auto canvas = globalModules.getCanvas();
+    auto polygons = globalModules.getPolygonsContainer();
     EditUsingMode editUsingMode(window, canvas, globalModules.getPointDrawer(), globalModules.getLineDrawer(), globalModules.getPolygonsContainer());
 
     sf::Event event;
@@ -20,9 +21,12 @@ int main() {
         canvas->setPixel(rand() % 1200, rand() % 860, sf::Color::Red);
         editUsingMode.update();
 
-        canvas->updateTexture();
         window->clear();
         window->draw(*upperPanel);
+        canvas->clear();
+        polygons->draw();
+        editUsingMode.draw();
+        canvas->updateTexture();
         window->draw(*canvas);
         window->display();
 
