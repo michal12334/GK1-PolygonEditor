@@ -12,6 +12,9 @@ Canvas::Canvas(sf::Vector2i size, sf::Vector2f position) {
 }
 
 void Canvas::setPixel(int x, int y, Color color) {
+    if(x < 0 || y < 0 || x >= size.x || y >= size.y)
+        return;
+
     image.setPixel(x, y, color);
 }
 
