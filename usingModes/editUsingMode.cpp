@@ -12,11 +12,8 @@ EditUsingMode::EditUsingMode(Window* window, Canvas* canvas, PointDrawer* pointD
 
 void EditUsingMode::update() {
     auto mousePositionOnCanvas = getMousePositionOnCanvas();
-    if(mousePositionOnCanvas.x < 0 ||
-        mousePositionOnCanvas.y < 0 ||
-        mousePositionOnCanvas.x >= canvas->getSize().x ||
-        mousePositionOnCanvas.y >= canvas->getSize().y)
-            return;
+    if(isMouseOnCanvas(mousePositionOnCanvas))
+        return;
 
     if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = true;
@@ -64,4 +61,11 @@ Vector2i EditUsingMode::getMousePositionOnCanvas() {
     auto canvasPosition = canvas->getPosition();
     auto mousePosition = Mouse::getPosition(*window);
     return Vector2i(mousePosition.x - canvasPosition.x, mousePosition.y - canvasPosition.y);
+}
+
+bool EditUsingMode::isMouseOnCanvas(Vector2i mousePositionOnCanvas) {
+    return mousePositionOnCanvas.x >= 0 &&
+        mousePositionOnCanvas.y >= 0 &&
+        mousePositionOnCanvas.x < canvas->getSize().x &&
+        mousePositionOnCanvas.y < canvas->getSize().y;
 }
