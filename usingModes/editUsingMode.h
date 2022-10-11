@@ -17,7 +17,6 @@ public:
     void draw();
 
 private:
-    bool isMouseOnFirstPoint(sf::Vector2i mousePosition);
     sf::Vector2i getMousePositionOnCanvas();
     bool isMouseOnCanvas(sf::Vector2i mousePositionOnCanvas);
 

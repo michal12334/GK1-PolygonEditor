@@ -44,17 +44,6 @@ void EditUsingMode::draw() {
     polygonCreator->draw();
 }
 
-bool EditUsingMode::isMouseOnFirstPoint(Vector2i mousePosition) {
-    if(points.size() == 0)
-        return false;
-
-    auto firstPointPosition = points[0];
-    int d2 = (mousePosition.x - firstPointPosition.x) * (mousePosition.x - firstPointPosition.x) +
-        (mousePosition.y - firstPointPosition.y) * (mousePosition.y - firstPointPosition.y);
-
-    return d2 <= 6*6;
-}
-
 Vector2i EditUsingMode::getMousePositionOnCanvas() {
     auto canvasPosition = canvas->getPosition();
     auto mousePosition = Mouse::getPosition(*window);
