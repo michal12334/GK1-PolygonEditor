@@ -7,10 +7,12 @@
 #include "../drawers/lineDrawer.h"
 #include <vector>
 #include "../polygons/polygonsContainer.h"
+#include "polygonCreator.h"
 
 class EditUsingMode : public UsingMode {
 public:
     EditUsingMode(sf::Window* window, Canvas* canvas, PointDrawer* pointDrawer, LineDrawer* lineDrawer, PolygonsContainer* polygonsContainer);
+    ~EditUsingMode();
     virtual void update() override;
     void draw();
 
@@ -27,4 +29,6 @@ private:
     bool isPolygonBeingDrawn = false;
     std::vector<sf::Vector2i> points;
     PolygonsContainer* polygonsContainer;
+
+    PolygonCreator* polygonCreator;
 };
