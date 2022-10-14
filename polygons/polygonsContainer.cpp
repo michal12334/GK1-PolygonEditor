@@ -21,3 +21,7 @@ void PolygonsContainer::draw() {
         p.draw();
     }
 }
+
+vector<Polygon> PolygonsContainer::getPolygons() {
+    return polygons;
+}

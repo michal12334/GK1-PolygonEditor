@@ -15,3 +15,7 @@ void Polygon::draw() {
         lineDrawer->draw(points[i], points[(i + 1) % points.size()]);
     }
 }
+
+vector<Vector2i> Polygon::getPoints() const {
+    return points;
+}

@@ -12,6 +12,7 @@ public:
     void addPolygon(Polygon polygon);
     void addPolygon(std::vector<sf::Vector2i> points);
     void draw();
+    std::vector<Polygon> getPolygons();
 
 private:
     std::vector<Polygon> polygons;
