@@ -19,3 +19,7 @@ void Polygon::draw() {
 vector<Vector2i> Polygon::getPoints() const {
     return points;
 }
+
+void Polygon::updatePoint(int index, Vector2i newValue) {
+    points[index] = newValue;
+}

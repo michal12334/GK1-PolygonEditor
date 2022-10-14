@@ -25,3 +25,7 @@ void PolygonsContainer::draw() {
 vector<Polygon> PolygonsContainer::getPolygons() {
     return polygons;
 }
+
+void PolygonsContainer::updatePolygon(int polygonIndex, int pointIndex, Vector2i newPointValue) {
+    polygons[polygonIndex].updatePoint(pointIndex, newPointValue);
+}

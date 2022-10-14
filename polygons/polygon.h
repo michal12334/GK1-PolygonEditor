@@ -11,6 +11,7 @@ public:
     Polygon(const std::vector<sf::Vector2i>& points, PointDrawer* pointDrawer, LineDrawer* lineDrawer);
     void draw();
     std::vector<sf::Vector2i> getPoints() const;
+    void updatePoint(int index, sf::Vector2i newValue);
 
 private:
     std::vector<sf::Vector2i> points;
