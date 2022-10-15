@@ -7,7 +7,7 @@
 
 int main() {
     GlobalModules globalModules;
-    auto window = globalModules.GetWindow();
+    auto window = globalModules.getWindow();
     auto upperPanel = globalModules.getUpperPanel();
     auto canvas = globalModules.getCanvas();
     auto polygons = globalModules.getPolygonsContainer();
@@ -16,6 +16,7 @@ int main() {
     sf::Event event;
     while (window->isOpen()) {
         editUsingMode.update();
+        upperPanel->update();
 
         window->clear();
         window->draw(*upperPanel);

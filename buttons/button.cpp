@@ -5,7 +5,7 @@ using namespace sf;
 Button::Button(Vector2f size, Vector2f position, int borderSize) {
     this->size = size;
     this->position = position;
-    isActive = false;
+    active = false;
     rectangle.setSize(size);
     rectangle.setPosition(position);
     rectangle.setFillColor(Color::Red);
@@ -23,7 +23,7 @@ Button::Button(Vector2f size, Vector2f position, int borderSize) {
     borderUp.setFillColor(Color::Black);
 }
 
-bool Button::isClicked(Window* window) {
+bool Button::isTouched(Window* window) {
     auto mousePosition = Mouse::getPosition(*window);
     return mousePosition.x >= getLeft() &&
         mousePosition.x <= getRight() &&
@@ -47,13 +47,17 @@ float Button::getBottom() {
     return position.y + size.y;
 }
 
-void Button::setActive(bool isActive) {
-    this->isActive = isActive;
+void Button::setActive(bool active) {
+    this->active = active;
+}
+
+bool Button::isActive() {
+    return active;
 }
 
 void Button::draw(RenderTarget &target, RenderStates states) const {
     target.draw(rectangle, states);
-    if(isActive) {
+    if(active) {
         target.draw(borderLeft, states);
         target.draw(borderRight, states);
         target.draw(borderUp, states);

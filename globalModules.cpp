@@ -37,7 +37,7 @@ GlobalModules::~GlobalModules() {
         delete edgeTouchDetector;
 }
 
-RenderWindow* GlobalModules::GetWindow() {
+RenderWindow* GlobalModules::getWindow() {
     if(window == nullptr) {
         window = new RenderWindow(sf::VideoMode(1200, 900), "title");
     }
@@ -50,7 +50,7 @@ int GlobalModules::getWindowWidth() {
 
 UpperPanel* GlobalModules::getUpperPanel() {
     if(upperPanel == nullptr)
-        upperPanel = new UpperPanel(Vector2f(getWindowWidth(), 40));
+        upperPanel = new UpperPanel(getWindow(), Vector2f(getWindowWidth(), 40));
 
     return upperPanel;
 }

@@ -14,7 +14,7 @@ class GlobalModules {
 public:
     GlobalModules();
     ~GlobalModules();
-    sf::RenderWindow* GetWindow();
+    sf::RenderWindow* getWindow();
     int getWindowWidth();
     UpperPanel* getUpperPanel();
     Canvas* getCanvas();

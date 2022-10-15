@@ -5,11 +5,14 @@
 
 class UpperPanel : public sf::Drawable {
 public:
-    UpperPanel(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), float padding = 5);
+    UpperPanel(sf::Window* window, sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), float padding = 5);
     ~UpperPanel();
+    void update();
 
 private:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+    sf::Window* window;
 
     sf::Vector2f size;
     sf::Vector2f position;
@@ -20,4 +23,6 @@ private:
     Button* normalModeButton;
     Button* polygonEditModeButton;
     Button* relationAddModeButton;
+
+    bool isMouseLeftButtonPressed = false;
 };

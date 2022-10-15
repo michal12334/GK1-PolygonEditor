@@ -5,12 +5,13 @@
 class Button : public sf::Drawable {
 public:
     Button(sf::Vector2f size, sf::Vector2f position, int borderSize);
-    bool isClicked(sf::Window* window);
+    bool isTouched(sf::Window* window);
     float getLeft();
     float getRight();
     float getUp();
     float getBottom();
-    void setActive(bool isActive);
+    void setActive(bool active);
+    bool isActive();
 
 private:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
@@ -23,5 +24,5 @@ private:
     sf::RectangleShape borderRight;
     sf::RectangleShape borderUp;
     sf::RectangleShape borderBottom;
-    bool isActive;
+    bool active;
 };
