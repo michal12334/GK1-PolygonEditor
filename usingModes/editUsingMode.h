@@ -31,13 +31,15 @@ private:
     sf::Vector2i getMousePositionOnCanvas();
     bool isMouseOnCanvas(sf::Vector2i mousePositionOnCanvas);
     void updateHighlight(sf::Vector2i mousePositionOnCanvas);
-    void doLeftButtonAction(sf::Vector2i mousePositionOnCanvas);
-    void doRightButtonAction(sf::Vector2i mousePositionOnCanvas);
+    void doMouseLeftButtonAction(sf::Vector2i mousePositionOnCanvas);
+    void doMouseRightButtonAction(sf::Vector2i mousePositionOnCanvas);
+    void doDeleteButtonAction();
 
     sf::Window* window;
     Canvas* canvas;
     bool isMouseLeftButtonPressed = false;
     bool isMouseRightButtonPressed = false;
+    bool isDeleteButtonPressed = false;
     PointDrawer* pointDrawer;
     LineDrawer* lineDrawer;
     bool isPolygonBeingDrawn = false;

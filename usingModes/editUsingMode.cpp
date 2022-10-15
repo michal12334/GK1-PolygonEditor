@@ -32,8 +32,9 @@ void EditUsingMode::update() {
         return;
 
     updateHighlight(mousePositionOnCanvas);
-    doLeftButtonAction(mousePositionOnCanvas);
-    doRightButtonAction(mousePositionOnCanvas);
+    doMouseLeftButtonAction(mousePositionOnCanvas);
+    doMouseRightButtonAction(mousePositionOnCanvas);
+    doDeleteButtonAction();
 }
 
 void EditUsingMode::draw() {
@@ -77,7 +78,7 @@ void EditUsingMode::updateHighlight(Vector2i mousePositionOnCanvas) {
         delete currentTouchedEdgeData;
 }
 
-void EditUsingMode::doLeftButtonAction(Vector2i mousePositionOnCanvas) {
+void EditUsingMode::doMouseLeftButtonAction(Vector2i mousePositionOnCanvas) {
     if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = true;
         polygonsContainer->clearSelection();
@@ -131,7 +132,7 @@ void EditUsingMode::doLeftButtonAction(Vector2i mousePositionOnCanvas) {
     }
 }
 
-void EditUsingMode::doRightButtonAction(Vector2i mousePositionOnCanvas) {
+void EditUsingMode::doMouseRightButtonAction(Vector2i mousePositionOnCanvas) {
     if(Mouse::isButtonPressed(Mouse::Button::Right)) {
         if(!isMouseRightButtonPressed && polygonsContainer->isEdgeHighlighten())
             polygonsContainer->addPointOnHighlightenEdge();
@@ -139,5 +140,18 @@ void EditUsingMode::doRightButtonAction(Vector2i mousePositionOnCanvas) {
         isMouseRightButtonPressed = true;
     } else {
         isMouseRightButtonPressed = false;
+    }
+}
+
+void EditUsingMode::doDeleteButtonAction() {
+    if(Keyboard::isKeyPressed(Keyboard::Key::Delete)) {
+        if(!isDeleteButtonPressed) {
+            if(polygonsContainer->isSomethingSelected()) {
+                polygonsContainer->deleteSelected();
+            }
+        }
+        isDeleteButtonPressed = true;
+    } else {
+        isDeleteButtonPressed = false;
     }
 }

@@ -91,12 +91,14 @@ void PolygonsContainer::deleteSelected() {
         polygons[selectedPolygonIndex].deletePoint(selectedPointIndex);
     } else if(selectedEdgeIndex != -1) {
         polygons[selectedPolygonIndex].deletePoint(selectedEdgeIndex);
-        polygons[selectedPolygonIndex].deletePoint(selectedEdgeIndex);
+        polygons[selectedPolygonIndex].deletePoint(selectedEdgeIndex % polygons[selectedPolygonIndex].getPoints().size());
     }
 
     if(polygons[selectedPolygonIndex].getPoints().size() < 3) {
         polygons.erase(polygons.begin() + selectedPolygonIndex);
     }
+
+    clearSelection();
 }
 
 bool PolygonsContainer::isSomethingSelected() {
