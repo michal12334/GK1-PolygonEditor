@@ -16,8 +16,8 @@ public:
     void draw();
     std::vector<Polygon> getPolygons();
     void updatePolygon(int polygonIndex, int pointIndex, sf::Vector2i newPointValue);
-    void setHighlight(TouchedEdgeData* touchedEdgeData);
-    void setHighlight(TouchedPointData* touchedPointData);
+    void setHighlighten(TouchedEdgeData* touchedEdgeData);
+    void setHighlighten(TouchedPointData* touchedPointData);
     void clearHighlight();
     bool isEdgeHighlighten();
     void addPointOnHighlightenEdge();

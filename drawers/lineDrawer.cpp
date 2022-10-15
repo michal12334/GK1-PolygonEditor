@@ -12,24 +12,24 @@ void LineDrawer::draw(Vector2i startPoint, Vector2i finishPoint, Color color) {
     int dx = finishPoint.x - startPoint.x;
     int dy = finishPoint.y - startPoint.y;
     if(dx >= 0 && dy >= 0 && dx >= dy)
-        bresenham1(startPoint, finishPoint, dx, dy, color);
+        bresenhamX(startPoint, finishPoint, dx, dy, color);
     else if(dx >= 0 && dy >= 0 && dx < dy)
-        bresenham2(startPoint, finishPoint, dx, dy, color);
+        bresenhamY(startPoint, finishPoint, dx, dy, color);
     else if(dx < 0 && dy >= 0 && -dx >= dy)
-        bresenham1(finishPoint, startPoint, -dx, -dy, color);
+        bresenhamX(finishPoint, startPoint, -dx, -dy, color);
     else if(dx < 0 && dy >= 0 && -dx < dy)
-        bresenham2(startPoint, finishPoint, dx, dy, color);
+        bresenhamY(startPoint, finishPoint, dx, dy, color);
     else if(dx >= 0 && dy < 0 && dx >= -dy)
-        bresenham1(startPoint, finishPoint, dx, dy, color);
+        bresenhamX(startPoint, finishPoint, dx, dy, color);
     else if(dx >= 0 && dy < 0 && dx < -dy)
-        bresenham2(finishPoint, startPoint, -dx, -dy, color);
+        bresenhamY(finishPoint, startPoint, -dx, -dy, color);
     else if(dx < 0 && dy < 0 && -dx >= -dy)
-        bresenham1(finishPoint, startPoint, -dx, -dy, color);
+        bresenhamX(finishPoint, startPoint, -dx, -dy, color);
     else if(dx < 0 && dy < 0 && -dx < -dy)
-        bresenham2(finishPoint, startPoint, -dx, -dy, color);
+        bresenhamY(finishPoint, startPoint, -dx, -dy, color);
 }
 
-void LineDrawer::bresenham1(Vector2i startPoint, Vector2i finishPoint, int dx, int dy, Color color) {
+void LineDrawer::bresenhamX(Vector2i startPoint, Vector2i finishPoint, int dx, int dy, Color color) {
     int d = 2 * abs(dy) - dx;
     int incrE = 2 * abs(dy);
     int incrNE = 2 * (abs(dy) - dx);
@@ -49,7 +49,7 @@ void LineDrawer::bresenham1(Vector2i startPoint, Vector2i finishPoint, int dx, i
     }
 }
 
-void LineDrawer::bresenham2(Vector2i startPoint, Vector2i finishPoint, int dx, int dy, Color color) {
+void LineDrawer::bresenhamY(Vector2i startPoint, Vector2i finishPoint, int dx, int dy, Color color) {
     int d = 2 * abs(dx) - dy;
     int incrE = 2 * abs(dx);
     int incrNE = 2 * (abs(dx) - dy);

@@ -119,9 +119,9 @@ void EditUsingMode::updateHighlight(Vector2i mousePositionOnCanvas) {
     auto currentTouchedPointData = pointTouchDetector->getTouchedPoint(mousePositionOnCanvas);
     auto currentTouchedEdgeData = edgeTouchDetector->getTouchedEdge(mousePositionOnCanvas);
     if(currentTouchedPointData != nullptr)
-        polygonsContainer->setHighlight(currentTouchedPointData);
+        polygonsContainer->setHighlighten(currentTouchedPointData);
     else if(currentTouchedEdgeData != nullptr)
-        polygonsContainer->setHighlight(currentTouchedEdgeData);
+        polygonsContainer->setHighlighten(currentTouchedEdgeData);
     
     if(currentTouchedPointData != nullptr)
         delete currentTouchedPointData;
