@@ -2,13 +2,22 @@
 
 using namespace sf;
 
-EditUsingMode::EditUsingMode(Window* window, Canvas* canvas, PointDrawer* pointDrawer, LineDrawer* lineDrawer, PolygonsContainer* polygonsContainer, PointTouchDetector* pointTouchDetector) {
+EditUsingMode::EditUsingMode(
+    Window* window,
+    Canvas* canvas,
+    PointDrawer* pointDrawer,
+    LineDrawer* lineDrawer,
+    PolygonsContainer* polygonsContainer,
+    PointTouchDetector* pointTouchDetector,
+    EdgeTouchDetector* edgeTouchDetector)
+{
     this->window = window;
     this->canvas = canvas;
     this->pointDrawer = pointDrawer;
     this->lineDrawer = lineDrawer;
     this->polygonsContainer = polygonsContainer;
     this->pointTouchDetector = pointTouchDetector;
+    this->edgeTouchDetector = edgeTouchDetector;
     
     polygonCreator = new PolygonCreator(pointDrawer, lineDrawer, canvas, window);
 }
@@ -34,9 +43,15 @@ void EditUsingMode::update() {
         } else {
             auto currentTouchedPointData = pointTouchDetector->getTouchedPoint(mousePositionOnCanvas);
             if(currentTouchedPointData == nullptr) {
-                polygonCreator->restart();
-                isPolygonBeingDrawn = true;
-                polygonCreator->update();
+                auto currentTouchedEdgeData = edgeTouchDetector->getTouchedEdge(mousePositionOnCanvas);
+                if(currentTouchedEdgeData == nullptr) {
+                    polygonCreator->restart();
+                    isPolygonBeingDrawn = true;
+                    polygonCreator->update();
+                } else {
+                    touchedEdgeData = currentTouchedEdgeData;
+                    edgeDragAndDropper = new EdgeDragAndDropper(touchedEdgeData, lineDrawer, pointDrawer, polygonsContainer, mousePositionOnCanvas);
+                }
             } else {
                 touchedPointData = currentTouchedPointData;
                 pointDragAndDropper = new PointDragAndDropper(touchedPointData, lineDrawer, pointDrawer, polygonsContainer, mousePositionOnCanvas);
@@ -50,10 +65,18 @@ void EditUsingMode::update() {
             delete touchedPointData;
             pointDragAndDropper = nullptr;
             touchedPointData = nullptr;
+        } else if(edgeDragAndDropper != nullptr) {
+            edgeDragAndDropper->finish();
+            delete edgeDragAndDropper;
+            delete touchedEdgeData;
+            edgeDragAndDropper = nullptr;
+            touchedEdgeData = nullptr;
         }
     } else {
         if(pointDragAndDropper != nullptr) {
             pointDragAndDropper->update(mousePositionOnCanvas);
+        } else if(edgeDragAndDropper != nullptr) {
+            edgeDragAndDropper->update(mousePositionOnCanvas);
         }
     }
 }
@@ -61,6 +84,8 @@ void EditUsingMode::update() {
 void EditUsingMode::draw() {
     if(pointDragAndDropper != nullptr)
         pointDragAndDropper->draw();
+    else if(edgeDragAndDropper != nullptr)
+        edgeDragAndDropper->draw();
     else if(isPolygonBeingDrawn)
         polygonCreator->draw();
 }

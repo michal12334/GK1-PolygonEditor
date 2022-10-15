@@ -10,10 +10,19 @@
 #include "polygonCreator.h"
 #include "../touchDetectors/pointTouchDetector.h"
 #include "../dragAndDroppers/pointDragAndDropper.h"
+#include "../touchDetectors/edgeTouchDetector.h"
+#include "../dragAndDroppers/edgeDragAndDropper.h"
 
 class EditUsingMode : public UsingMode {
 public:
-    EditUsingMode(sf::Window* window, Canvas* canvas, PointDrawer* pointDrawer, LineDrawer* lineDrawer, PolygonsContainer* polygonsContainer, PointTouchDetector* pointTouchDetector);
+    EditUsingMode(
+        sf::Window* window,
+        Canvas* canvas,
+        PointDrawer* pointDrawer,
+        LineDrawer* lineDrawer,
+        PolygonsContainer* polygonsContainer,
+        PointTouchDetector* pointTouchDetector,
+        EdgeTouchDetector* edgeTouchDetector);
     ~EditUsingMode();
     virtual void update() override;
     void draw();
@@ -32,6 +41,9 @@ private:
     PolygonsContainer* polygonsContainer;
     PolygonCreator* polygonCreator;
     PointTouchDetector* pointTouchDetector;
+    EdgeTouchDetector* edgeTouchDetector;
     TouchedPointData* touchedPointData = nullptr;
     PointDragAndDropper* pointDragAndDropper = nullptr;
+    TouchedEdgeData* touchedEdgeData = nullptr;
+    EdgeDragAndDropper* edgeDragAndDropper = nullptr;
 };

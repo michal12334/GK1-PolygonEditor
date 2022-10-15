@@ -32,6 +32,9 @@ GlobalModules::~GlobalModules() {
 
     if(pointTouchDetector != nullptr)
         delete pointTouchDetector;
+
+    if(edgeTouchDetector != nullptr)
+        delete edgeTouchDetector;
 }
 
 RenderWindow* GlobalModules::GetWindow() {
@@ -85,6 +88,13 @@ PointTouchDetector* GlobalModules::getPointTouchDetector() {
         pointTouchDetector = new PointTouchDetector(getPolygonsContainer());
 
     return pointTouchDetector;
+}
+
+EdgeTouchDetector* GlobalModules::getEdgeTouchDetector() {
+    if(edgeTouchDetector == nullptr)
+        edgeTouchDetector = new EdgeTouchDetector(getPolygonsContainer());
+
+    return edgeTouchDetector;
 }
 
 GlobalModules::UsingModeType GlobalModules::getUsingModeType() {
