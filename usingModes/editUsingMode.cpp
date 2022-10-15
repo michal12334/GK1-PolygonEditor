@@ -32,9 +32,55 @@ void EditUsingMode::update() {
         return;
 
     updateHighlight(mousePositionOnCanvas);
+    doLeftButtonAction(mousePositionOnCanvas);
+    doRightButtonAction(mousePositionOnCanvas);
+}
 
+void EditUsingMode::draw() {
+    if(pointDragAndDropper != nullptr)
+        pointDragAndDropper->draw();
+    else if(edgeDragAndDropper != nullptr)
+        edgeDragAndDropper->draw();
+    else if(isPolygonBeingDrawn)
+        polygonCreator->draw();
+}
+
+Vector2i EditUsingMode::getMousePositionOnCanvas() {
+    auto canvasPosition = canvas->getPosition();
+    auto mousePosition = Mouse::getPosition(*window);
+    return Vector2i(mousePosition.x - canvasPosition.x, mousePosition.y - canvasPosition.y);
+}
+
+bool EditUsingMode::isMouseOnCanvas(Vector2i mousePositionOnCanvas) {
+    return mousePositionOnCanvas.x >= 0 &&
+        mousePositionOnCanvas.y >= 0 &&
+        mousePositionOnCanvas.x < canvas->getSize().x &&
+        mousePositionOnCanvas.y < canvas->getSize().y;
+}
+
+void EditUsingMode::updateHighlight(Vector2i mousePositionOnCanvas) {
+    if(polygonsContainer->isSomethingSelected())
+        return;
+
+    polygonsContainer->clearHighlight();
+    auto currentTouchedPointData = pointTouchDetector->getTouchedPoint(mousePositionOnCanvas);
+    auto currentTouchedEdgeData = edgeTouchDetector->getTouchedEdge(mousePositionOnCanvas);
+    if(currentTouchedPointData != nullptr)
+        polygonsContainer->setHighlighten(currentTouchedPointData);
+    else if(currentTouchedEdgeData != nullptr)
+        polygonsContainer->setHighlighten(currentTouchedEdgeData);
+    
+    if(currentTouchedPointData != nullptr)
+        delete currentTouchedPointData;
+
+    if(currentTouchedEdgeData != nullptr)
+        delete currentTouchedEdgeData;
+}
+
+void EditUsingMode::doLeftButtonAction(Vector2i mousePositionOnCanvas) {
     if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = true;
+        polygonsContainer->clearSelection();
         if(isPolygonBeingDrawn) {
             polygonCreator->update();
 
@@ -63,12 +109,14 @@ void EditUsingMode::update() {
         isMouseLeftButtonPressed = false;
         if(pointDragAndDropper != nullptr) {
             pointDragAndDropper->finish();
+            polygonsContainer->setSelection(touchedPointData);
             delete pointDragAndDropper;
             delete touchedPointData;
             pointDragAndDropper = nullptr;
             touchedPointData = nullptr;
         } else if(edgeDragAndDropper != nullptr) {
             edgeDragAndDropper->finish();
+            polygonsContainer->setSelection(touchedEdgeData);
             delete edgeDragAndDropper;
             delete touchedEdgeData;
             edgeDragAndDropper = nullptr;
@@ -81,7 +129,9 @@ void EditUsingMode::update() {
             edgeDragAndDropper->update(mousePositionOnCanvas);
         }
     }
+}
 
+void EditUsingMode::doRightButtonAction(Vector2i mousePositionOnCanvas) {
     if(Mouse::isButtonPressed(Mouse::Button::Right)) {
         if(!isMouseRightButtonPressed && polygonsContainer->isEdgeHighlighten())
             polygonsContainer->addPointOnHighlightenEdge();
@@ -90,42 +140,4 @@ void EditUsingMode::update() {
     } else {
         isMouseRightButtonPressed = false;
     }
-}
-
-void EditUsingMode::draw() {
-    if(pointDragAndDropper != nullptr)
-        pointDragAndDropper->draw();
-    else if(edgeDragAndDropper != nullptr)
-        edgeDragAndDropper->draw();
-    else if(isPolygonBeingDrawn)
-        polygonCreator->draw();
-}
-
-Vector2i EditUsingMode::getMousePositionOnCanvas() {
-    auto canvasPosition = canvas->getPosition();
-    auto mousePosition = Mouse::getPosition(*window);
-    return Vector2i(mousePosition.x - canvasPosition.x, mousePosition.y - canvasPosition.y);
-}
-
-bool EditUsingMode::isMouseOnCanvas(Vector2i mousePositionOnCanvas) {
-    return mousePositionOnCanvas.x >= 0 &&
-        mousePositionOnCanvas.y >= 0 &&
-        mousePositionOnCanvas.x < canvas->getSize().x &&
-        mousePositionOnCanvas.y < canvas->getSize().y;
-}
-
-void EditUsingMode::updateHighlight(Vector2i mousePositionOnCanvas) {
-    polygonsContainer->clearHighlight();
-    auto currentTouchedPointData = pointTouchDetector->getTouchedPoint(mousePositionOnCanvas);
-    auto currentTouchedEdgeData = edgeTouchDetector->getTouchedEdge(mousePositionOnCanvas);
-    if(currentTouchedPointData != nullptr)
-        polygonsContainer->setHighlighten(currentTouchedPointData);
-    else if(currentTouchedEdgeData != nullptr)
-        polygonsContainer->setHighlighten(currentTouchedEdgeData);
-    
-    if(currentTouchedPointData != nullptr)
-        delete currentTouchedPointData;
-
-    if(currentTouchedEdgeData != nullptr)
-        delete currentTouchedEdgeData;
 }

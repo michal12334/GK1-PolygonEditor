@@ -50,3 +50,7 @@ void Polygon::addPointOnEdge(int edgeIndex) {
     auto next = points[(edgeIndex + 1) % points.size()];
     points.insert(points.begin() + edgeIndex + 1, (prev + next) / 2);
 }
+
+void Polygon::deletePoint(int index) {
+    points.erase(points.begin() + index);
+}

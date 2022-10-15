@@ -15,6 +15,7 @@ public:
     std::vector<sf::Vector2i> getPoints() const;
     void updatePoint(int index, sf::Vector2i newValue);
     void addPointOnEdge(int edgeIndex);
+    void deletePoint(int index);
 
 private:
     std::vector<sf::Vector2i> points;

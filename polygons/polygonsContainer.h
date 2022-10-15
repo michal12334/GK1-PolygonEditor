@@ -21,6 +21,11 @@ public:
     void clearHighlight();
     bool isEdgeHighlighten();
     void addPointOnHighlightenEdge();
+    void setSelection(TouchedEdgeData* touchedEdgeData);
+    void setSelection(TouchedPointData* touchedPointData);
+    void clearSelection();
+    void deleteSelected();
+    bool isSomethingSelected();
 
 private:
     std::vector<Polygon> polygons;
@@ -30,4 +35,8 @@ private:
     int highlightenPolygonIndex;
     int highlightenPointIndex;
     int highlightenEdgeIndex;
+
+    int selectedPolygonIndex;
+    int selectedPointIndex;
+    int selectedEdgeIndex;
 };

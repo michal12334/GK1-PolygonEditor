@@ -24,6 +24,10 @@ void PolygonsContainer::draw() {
             polygons[i].drawWithHighlihtenEdge(highlightenEdgeIndex, Color::Red);
         else if(highlightenPolygonIndex == i && highlightenPointIndex != -1)
             polygons[i].drawWithHighlihtenPoint(highlightenPointIndex, Color::Red);
+        else if(selectedPolygonIndex == i && selectedEdgeIndex != -1)
+            polygons[i].drawWithHighlihtenEdge(selectedEdgeIndex, Color::Green);
+        else if(selectedPolygonIndex == i && selectedPointIndex != -1)
+            polygons[i].drawWithHighlihtenPoint(selectedPointIndex, Color::Green);
         else
             polygons[i].draw();
     }
@@ -59,4 +63,42 @@ bool PolygonsContainer::isEdgeHighlighten() {
 
 void PolygonsContainer::addPointOnHighlightenEdge() {
     polygons[highlightenPolygonIndex].addPointOnEdge(highlightenEdgeIndex);
+}
+
+void PolygonsContainer::setSelection(TouchedEdgeData* touchedEdgeData) {
+    clearHighlight();
+    selectedPolygonIndex = touchedEdgeData->polygonIndex;
+    selectedEdgeIndex = touchedEdgeData->startPointIndex;
+}
+
+void PolygonsContainer::setSelection(TouchedPointData* touchedPointData) {
+    clearHighlight();
+    selectedPolygonIndex = touchedPointData->polygonIndex;
+    selectedPointIndex = touchedPointData->pointIndex;
+}
+
+void PolygonsContainer::clearSelection() {
+    selectedPolygonIndex = -1;
+    selectedPointIndex = -1;
+    selectedEdgeIndex = -1;
+}
+
+void PolygonsContainer::deleteSelected() {
+    if(selectedPolygonIndex == -1)
+        return;
+
+    if(selectedPointIndex != -1) {
+        polygons[selectedPolygonIndex].deletePoint(selectedPointIndex);
+    } else if(selectedEdgeIndex != -1) {
+        polygons[selectedPolygonIndex].deletePoint(selectedEdgeIndex);
+        polygons[selectedPolygonIndex].deletePoint(selectedEdgeIndex);
+    }
+
+    if(polygons[selectedPolygonIndex].getPoints().size() < 3) {
+        polygons.erase(polygons.begin() + selectedPolygonIndex);
+    }
+}
+
+bool PolygonsContainer::isSomethingSelected() {
+    return selectedPolygonIndex != -1;
 }

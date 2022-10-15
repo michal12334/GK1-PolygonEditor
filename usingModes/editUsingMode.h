@@ -31,6 +31,8 @@ private:
     sf::Vector2i getMousePositionOnCanvas();
     bool isMouseOnCanvas(sf::Vector2i mousePositionOnCanvas);
     void updateHighlight(sf::Vector2i mousePositionOnCanvas);
+    void doLeftButtonAction(sf::Vector2i mousePositionOnCanvas);
+    void doRightButtonAction(sf::Vector2i mousePositionOnCanvas);
 
     sf::Window* window;
     Canvas* canvas;
