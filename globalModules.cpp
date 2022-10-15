@@ -29,6 +29,9 @@ GlobalModules::~GlobalModules() {
 
     if(polygonsContainer != nullptr)
         delete polygonsContainer;
+
+    if(pointTouchDetector != nullptr)
+        delete pointTouchDetector;
 }
 
 RenderWindow* GlobalModules::GetWindow() {
@@ -75,6 +78,13 @@ PolygonsContainer* GlobalModules::getPolygonsContainer() {
         polygonsContainer = new PolygonsContainer(getLineDrawer(), getPointDrawer());
 
     return polygonsContainer;
+}
+
+PointTouchDetector* GlobalModules::getPointTouchDetector() {
+    if(pointTouchDetector == nullptr)
+        pointTouchDetector = new PointTouchDetector(getPolygonsContainer());
+
+    return pointTouchDetector;
 }
 
 GlobalModules::UsingModeType GlobalModules::getUsingModeType() {

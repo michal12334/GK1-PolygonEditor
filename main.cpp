@@ -11,7 +11,7 @@ int main() {
     auto upperPanel = globalModules.getUpperPanel();
     auto canvas = globalModules.getCanvas();
     auto polygons = globalModules.getPolygonsContainer();
-    EditUsingMode editUsingMode(window, canvas, globalModules.getPointDrawer(), globalModules.getLineDrawer(), globalModules.getPolygonsContainer());
+    EditUsingMode editUsingMode(window, canvas, globalModules.getPointDrawer(), globalModules.getLineDrawer(), globalModules.getPolygonsContainer(), globalModules.getPointTouchDetector());
 
     sf::Event event;
     while (window->isOpen()) {

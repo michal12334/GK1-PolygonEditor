@@ -7,6 +7,7 @@
 #include "drawers/lineDrawer.h"
 #include "drawers/pointDrawer.h"
 #include "polygons/polygonsContainer.h"
+#include "touchDetectors/pointTouchDetector.h"
 
 class GlobalModules {
 public:
@@ -19,6 +20,7 @@ public:
     LineDrawer* getLineDrawer();
     PointDrawer* getPointDrawer();
     PolygonsContainer* getPolygonsContainer();
+    PointTouchDetector* getPointTouchDetector();
 
     enum class UsingModeType {
         normal,
@@ -42,4 +44,5 @@ private:
     LineDrawer* lineDrawer = nullptr;
     PointDrawer* pointDrawer = nullptr;
     PolygonsContainer* polygonsContainer = nullptr;
+    PointTouchDetector* pointTouchDetector = nullptr;
 };
