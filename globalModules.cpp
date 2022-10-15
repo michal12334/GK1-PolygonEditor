@@ -64,7 +64,7 @@ Canvas* GlobalModules::getCanvas() {
 
 LineDrawer* GlobalModules::getLineDrawer() {
     if(lineDrawer == nullptr)
-        lineDrawer = new LineDrawer(getCanvas(), 1);
+        lineDrawer = new LineDrawer(getCanvas());
 
     return lineDrawer;
 }
