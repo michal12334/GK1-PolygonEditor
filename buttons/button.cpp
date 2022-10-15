@@ -2,9 +2,25 @@
 
 using namespace sf;
 
-Button::Button(Vector2f size, Vector2f position) {
+Button::Button(Vector2f size, Vector2f position, int borderSize) {
     this->size = size;
     this->position = position;
+    isActive = false;
+    rectangle.setSize(size);
+    rectangle.setPosition(position);
+    rectangle.setFillColor(Color::Red);
+    borderLeft.setSize(Vector2f(borderSize, size.y));
+    borderLeft.setPosition(position);
+    borderLeft.setFillColor(Color::Black);
+    borderRight.setSize(Vector2f(borderSize, size.y));
+    borderRight.setPosition(Vector2f(getRight() - borderSize, position.y));
+    borderRight.setFillColor(Color::Black);
+    borderBottom.setSize(Vector2f(size.x, borderSize));
+    borderBottom.setPosition(Vector2f(position.x, getBottom() - borderSize));
+    borderBottom.setFillColor(Color::Black);
+    borderUp.setSize(Vector2f(size.x, borderSize));
+    borderUp.setPosition(position);
+    borderUp.setFillColor(Color::Black);
 }
 
 bool Button::isClicked(Window* window) {
@@ -31,10 +47,16 @@ float Button::getBottom() {
     return position.y + size.y;
 }
 
-void Button::setSize(sf::Vector2f size) {
-    this->size = size;
+void Button::setActive(bool isActive) {
+    this->isActive = isActive;
 }
 
-void Button::setPosition(sf::Vector2f position) {
-    this->position = position;
+void Button::draw(RenderTarget &target, RenderStates states) const {
+    target.draw(rectangle, states);
+    if(isActive) {
+        target.draw(borderLeft, states);
+        target.draw(borderRight, states);
+        target.draw(borderUp, states);
+        target.draw(borderBottom, states);
+    }
 }

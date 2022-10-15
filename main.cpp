@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "globalModules.h"
-#include "buttons/rectangleButton.h"
+#include "buttons/button.h"
 #include "panels/upperPanel.h"
 #include "canvases/canvas.h"
 #include "usingModes/editUsingMode.h"
