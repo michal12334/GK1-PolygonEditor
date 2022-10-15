@@ -19,6 +19,8 @@ public:
     void setHighlight(TouchedEdgeData* touchedEdgeData);
     void setHighlight(TouchedPointData* touchedPointData);
     void clearHighlight();
+    bool isEdgeHighlighten();
+    void addPointOnHighlightenEdge();
 
 private:
     std::vector<Polygon> polygons;

@@ -14,6 +14,7 @@ public:
     void drawWithHighlihtenEdge(int edgeIndex, sf::Color color);
     std::vector<sf::Vector2i> getPoints() const;
     void updatePoint(int index, sf::Vector2i newValue);
+    void addPointOnEdge(int edgeIndex);
 
 private:
     std::vector<sf::Vector2i> points;

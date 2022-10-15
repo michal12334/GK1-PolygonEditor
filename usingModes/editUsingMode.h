@@ -35,6 +35,7 @@ private:
     sf::Window* window;
     Canvas* canvas;
     bool isMouseLeftButtonPressed = false;
+    bool isMouseRightButtonPressed = false;
     PointDrawer* pointDrawer;
     LineDrawer* lineDrawer;
     bool isPolygonBeingDrawn = false;

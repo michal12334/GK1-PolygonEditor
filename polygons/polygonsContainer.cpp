@@ -52,3 +52,11 @@ void PolygonsContainer::clearHighlight() {
     highlightenPointIndex = -1;
     highlightenEdgeIndex = -1;
 }
+
+bool PolygonsContainer::isEdgeHighlighten() {
+    return highlightenEdgeIndex != -1;
+}
+
+void PolygonsContainer::addPointOnHighlightenEdge() {
+    polygons[highlightenPolygonIndex].addPointOnEdge(highlightenEdgeIndex);
+}

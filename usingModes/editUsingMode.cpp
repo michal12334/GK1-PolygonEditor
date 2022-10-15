@@ -81,6 +81,15 @@ void EditUsingMode::update() {
             edgeDragAndDropper->update(mousePositionOnCanvas);
         }
     }
+
+    if(Mouse::isButtonPressed(Mouse::Button::Right)) {
+        if(!isMouseRightButtonPressed && polygonsContainer->isEdgeHighlighten())
+            polygonsContainer->addPointOnHighlightenEdge();
+
+        isMouseRightButtonPressed = true;
+    } else {
+        isMouseRightButtonPressed = false;
+    }
 }
 
 void EditUsingMode::draw() {

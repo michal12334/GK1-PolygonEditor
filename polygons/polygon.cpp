@@ -44,3 +44,9 @@ vector<Vector2i> Polygon::getPoints() const {
 void Polygon::updatePoint(int index, Vector2i newValue) {
     points[index] = newValue;
 }
+
+void Polygon::addPointOnEdge(int edgeIndex) {
+    auto prev = points[edgeIndex];
+    auto next = points[(edgeIndex + 1) % points.size()];
+    points.insert(points.begin() + edgeIndex + 1, (prev + next) / 2);
+}
