@@ -2,3 +2,6 @@
 
 void NormalUsingMode::update() {
 }
+
+void NormalUsingMode::draw() {
+}

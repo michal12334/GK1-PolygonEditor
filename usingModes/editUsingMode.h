@@ -25,7 +25,7 @@ public:
         EdgeTouchDetector* edgeTouchDetector);
     ~EditUsingMode();
     virtual void update() override;
-    void draw();
+    virtual void draw() override;
 
 private:
     sf::Vector2i getMousePositionOnCanvas();
