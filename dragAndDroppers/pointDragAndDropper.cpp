@@ -15,13 +15,13 @@ void PointDragAndDropper::update(Vector2i mousePositionOnCanvas) {
 }
 
 void PointDragAndDropper::draw() {
-    pointDrawer->draw(newPointPosition);
+    pointDrawer->draw(newPointPosition, Color::Green);
 
     auto points = touchedPointData->polygon.getPoints();
     int prev = (touchedPointData->pointIndex - 1 + points.size()) % points.size();
     int next = (touchedPointData->pointIndex + 1) % points.size();
-    lineDrawer->draw(newPointPosition, points[prev]);
-    lineDrawer->draw(newPointPosition, points[next]);
+    lineDrawer->draw(newPointPosition, points[prev], Color::Green);
+    lineDrawer->draw(newPointPosition, points[next], Color::Green);
 }
 
 void PointDragAndDropper::finish() {

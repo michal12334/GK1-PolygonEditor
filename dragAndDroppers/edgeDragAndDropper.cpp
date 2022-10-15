@@ -28,15 +28,15 @@ void EdgeDragAndDropper::update(Vector2i mousePosition) {
 }
 
 void EdgeDragAndDropper::draw() {
-    pointDrawer->draw(newStartPointPosition);
-    pointDrawer->draw(newFinishPointPosition);
-    lineDrawer->draw(newStartPointPosition, newFinishPointPosition);
+    pointDrawer->draw(newStartPointPosition, Color::Green);
+    pointDrawer->draw(newFinishPointPosition, Color::Green);
+    lineDrawer->draw(newStartPointPosition, newFinishPointPosition, Color::Green);
 
     auto points = touchedEdgeData->polygon.getPoints();
     int prev = (touchedEdgeData->startPointIndex - 1 + points.size()) % points.size();
     int next = (touchedEdgeData->finishPointIndex + 1) % points.size();
-    lineDrawer->draw(newStartPointPosition, points[prev]);
-    lineDrawer->draw(newFinishPointPosition, points[next]);
+    lineDrawer->draw(newStartPointPosition, points[prev], Color::Green);
+    lineDrawer->draw(newFinishPointPosition, points[next], Color::Green);
 }
 
 void EdgeDragAndDropper::finish() {
