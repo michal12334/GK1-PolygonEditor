@@ -1,6 +1,8 @@
 #include "edgeTouchDetector.h"
+#include <cmath>
 
 using namespace sf;
+using namespace std;
 
 EdgeTouchDetector::EdgeTouchDetector(PolygonsContainer* polygonsContainer) {
     this->polygonsContainer = polygonsContainer;
@@ -25,7 +27,11 @@ bool EdgeTouchDetector::isEdgeTouched(Vector2i startPoint, Vector2i finishPoint,
     int d2_1 = getDisctance2(startPoint, mousePosition);
     int d2_2 = getDisctance2(finishPoint, mousePosition);
 
-    return d2_1 + d2_2 - len2 <= 10;
+    auto len = sqrt(len2);
+    auto d1 = sqrt(d2_1);
+    auto d2 = sqrt(d2_2);
+
+    return d1 + d2 - len <= 3;
 }
 
 int EdgeTouchDetector::getDisctance2(sf::Vector2i a, sf::Vector2i b) {
