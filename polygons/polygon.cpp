@@ -10,10 +10,30 @@ Polygon::Polygon(const vector<Vector2i>& points, PointDrawer* pointDrawer, LineD
     this->lineDrawer = lineDrawer;
 }
 
-void Polygon::draw() {
+void Polygon::draw(Color color) {
+    for(int i = 0; i < points.size(); i++) {
+        pointDrawer->draw(points[i], color);
+        lineDrawer->draw(points[i], points[(i + 1) % points.size()], color);
+    }
+}
+
+void Polygon::drawWithHighlihtenPoint(int pointIndex, sf::Color color) {
+    for(int i = 0; i < points.size(); i++) {
+        if(i == pointIndex)
+            pointDrawer->draw(points[i], color);
+        else
+            pointDrawer->draw(points[i]);
+        lineDrawer->draw(points[i], points[(i + 1) % points.size()]);
+    }
+}
+
+void Polygon::drawWithHighlihtenEdge(int edgeIndex, sf::Color color) {
     for(int i = 0; i < points.size(); i++) {
         pointDrawer->draw(points[i]);
-        lineDrawer->draw(points[i], points[(i + 1) % points.size()]);
+        if(i == edgeIndex)
+            lineDrawer->draw(points[i], points[(i + 1) % points.size()], color);
+        else
+            lineDrawer->draw(points[i], points[(i + 1) % points.size()]);
     }
 }
 
