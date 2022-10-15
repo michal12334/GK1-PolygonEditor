@@ -39,7 +39,7 @@ void EditUsingMode::update() {
                 polygonCreator->update();
             } else {
                 touchedPointData = currentTouchedPointData;
-                pointDragAndDropper = new PointDragAndDropper(touchedPointData, lineDrawer, pointDrawer, polygonsContainer);
+                pointDragAndDropper = new PointDragAndDropper(touchedPointData, lineDrawer, pointDrawer, polygonsContainer, mousePositionOnCanvas);
             }
         }
     } else if(!Mouse::isButtonPressed(Mouse::Button::Left)) {

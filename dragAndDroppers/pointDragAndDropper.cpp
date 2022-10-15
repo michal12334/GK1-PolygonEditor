@@ -2,11 +2,12 @@
 
 using namespace sf;
 
-PointDragAndDropper::PointDragAndDropper(TouchedPointData* touchedPointData, LineDrawer* lineDrawer, PointDrawer* pointDrawer, PolygonsContainer *polygonsContainer) {
+PointDragAndDropper::PointDragAndDropper(TouchedPointData* touchedPointData, LineDrawer* lineDrawer, PointDrawer* pointDrawer, PolygonsContainer *polygonsContainer, Vector2i mousePositionOnCanvas) {
     this->touchedPointData = touchedPointData;
     this->lineDrawer = lineDrawer;
     this->pointDrawer = pointDrawer;
     this->polygonsContainer = polygonsContainer;
+    newPointPosition = mousePositionOnCanvas;
 }
 
 void PointDragAndDropper::update(Vector2i mousePositionOnCanvas) {
@@ -17,7 +18,10 @@ void PointDragAndDropper::draw() {
     pointDrawer->draw(newPointPosition);
 
     auto points = touchedPointData->polygon.getPoints();
-    lineDrawer->draw(newPointPosition, points[touchedPointData->pointIndex]);
+    int prev = (touchedPointData->pointIndex - 1 + points.size()) % points.size();
+    int next = (touchedPointData->pointIndex + 1) % points.size();
+    lineDrawer->draw(newPointPosition, points[prev]);
+    lineDrawer->draw(newPointPosition, points[next]);
 }
 
 void PointDragAndDropper::finish() {

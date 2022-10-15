@@ -8,7 +8,7 @@
 
 class PointDragAndDropper {
 public:
-    PointDragAndDropper(TouchedPointData* touchedPointData, LineDrawer* lineDrawer, PointDrawer* pointDrawer, PolygonsContainer *polygonsContainer);
+    PointDragAndDropper(TouchedPointData* touchedPointData, LineDrawer* lineDrawer, PointDrawer* pointDrawer, PolygonsContainer *polygonsContainer, sf::Vector2i mousePositionOnCanvas);
     void update(sf::Vector2i mousePositionOnCanvas);
     void draw();
     void finish();
