@@ -8,8 +8,8 @@ PointDrawer::PointDrawer(Canvas* canvas, int radius) {
 }
 
 void PointDrawer::draw(Vector2i position) {
-    for(int x = position.x - radius; x <= position.x + radius; x++) {
-        for(int y = position.y - radius; y <= position.y + radius; y++) {
+    for(int x = position.x - (radius + 1) / 2; x <= position.x + radius / 2; x++) {
+        for(int y = position.y - (radius + 1) / 2; y <= position.y + radius / 2; y++) {
             canvas->setPixel(x, y, Color::Black);
         }
     }
