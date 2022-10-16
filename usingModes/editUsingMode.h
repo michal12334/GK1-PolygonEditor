@@ -22,7 +22,8 @@ public:
         LineDrawer* lineDrawer,
         PolygonsContainer* polygonsContainer,
         PointTouchDetector* pointTouchDetector,
-        EdgeTouchDetector* edgeTouchDetector);
+        EdgeTouchDetector* edgeTouchDetector
+    );
     ~EditUsingMode();
     virtual void update() override;
     virtual void draw() override;

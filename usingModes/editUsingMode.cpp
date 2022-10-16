@@ -9,8 +9,8 @@ EditUsingMode::EditUsingMode(
     LineDrawer* lineDrawer,
     PolygonsContainer* polygonsContainer,
     PointTouchDetector* pointTouchDetector,
-    EdgeTouchDetector* edgeTouchDetector)
-{
+    EdgeTouchDetector* edgeTouchDetector
+) {
     this->window = window;
     this->canvas = canvas;
     this->pointDrawer = pointDrawer;
@@ -134,8 +134,13 @@ void EditUsingMode::doMouseLeftButtonAction(Vector2i mousePositionOnCanvas) {
 
 void EditUsingMode::doMouseRightButtonAction(Vector2i mousePositionOnCanvas) {
     if(Mouse::isButtonPressed(Mouse::Button::Right)) {
-        if(!isMouseRightButtonPressed && polygonsContainer->isEdgeHighlighten())
-            polygonsContainer->addPointOnHighlightenEdge();
+        if(!isMouseRightButtonPressed) {
+            if(polygonsContainer->isEdgeHighlighten())
+                polygonsContainer->addPointOnHighlightenEdge();
+
+            if(polygonsContainer->isSomethingSelected())
+                polygonsContainer->clearSelection();
+        }
 
         isMouseRightButtonPressed = true;
     } else {
