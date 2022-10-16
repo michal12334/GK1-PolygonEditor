@@ -13,6 +13,7 @@
 #include "../touchDetectors/edgeTouchDetector.h"
 #include "../dragAndDroppers/edgeDragAndDropper.h"
 #include "../touchDetectors/polygonTouchDetector.h"
+#include "../dragAndDroppers/polygonDragAndDropper.h"
 
 class EditUsingMode : public UsingMode {
 public:
@@ -56,4 +57,6 @@ private:
     PointDragAndDropper* pointDragAndDropper = nullptr;
     TouchedEdgeData* touchedEdgeData = nullptr;
     EdgeDragAndDropper* edgeDragAndDropper = nullptr;
+    TouchedPolygonData* touchedPolygonData = nullptr;
+    PolygonDragAndDropper* polygonDragAndDropper = nullptr;
 };

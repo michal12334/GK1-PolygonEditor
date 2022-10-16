@@ -44,6 +44,8 @@ void EditUsingMode::draw() {
         pointDragAndDropper->draw();
     else if(edgeDragAndDropper != nullptr)
         edgeDragAndDropper->draw();
+    else if(polygonDragAndDropper != nullptr)
+        polygonDragAndDropper->draw();
     else if(isPolygonBeingDrawn)
         polygonCreator->draw();
 }
@@ -102,9 +104,15 @@ void EditUsingMode::doMouseLeftButtonAction(Vector2i mousePositionOnCanvas) {
             if(currentTouchedPointData == nullptr) {
                 auto currentTouchedEdgeData = edgeTouchDetector->getTouchedEdge(mousePositionOnCanvas);
                 if(currentTouchedEdgeData == nullptr) {
-                    polygonCreator->restart();
-                    isPolygonBeingDrawn = true;
-                    polygonCreator->update();
+                    auto currentTouchedPolygonData = polygonTouchDetector->getTouchedPolygon(mousePositionOnCanvas);
+                    if(currentTouchedPolygonData == nullptr) {
+                        polygonCreator->restart();
+                        isPolygonBeingDrawn = true;
+                        polygonCreator->update();
+                    } else {
+                        touchedPolygonData = currentTouchedPolygonData;
+                        polygonDragAndDropper = new PolygonDragAndDropper(touchedPolygonData, lineDrawer, pointDrawer, polygonsContainer, mousePositionOnCanvas);
+                    }
                 } else {
                     touchedEdgeData = currentTouchedEdgeData;
                     edgeDragAndDropper = new EdgeDragAndDropper(touchedEdgeData, lineDrawer, pointDrawer, polygonsContainer, mousePositionOnCanvas);
@@ -130,12 +138,20 @@ void EditUsingMode::doMouseLeftButtonAction(Vector2i mousePositionOnCanvas) {
             delete touchedEdgeData;
             edgeDragAndDropper = nullptr;
             touchedEdgeData = nullptr;
+        } else if(polygonDragAndDropper != nullptr) {
+            polygonDragAndDropper->finish();
+            delete polygonDragAndDropper;
+            delete touchedPolygonData;
+            polygonDragAndDropper = nullptr;
+            touchedPolygonData = nullptr;
         }
     } else {
         if(pointDragAndDropper != nullptr) {
             pointDragAndDropper->update(mousePositionOnCanvas);
         } else if(edgeDragAndDropper != nullptr) {
             edgeDragAndDropper->update(mousePositionOnCanvas);
+        } else if(polygonDragAndDropper != nullptr) {
+            polygonDragAndDropper->update(mousePositionOnCanvas);
         }
     }
 }
