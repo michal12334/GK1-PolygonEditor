@@ -4,12 +4,13 @@
 #include "../drawers/lineDrawer.h"
 #include "../drawers/pointDrawer.h"
 #include "../polygons/polygonsContainer.h"
-#include "../touchDetectors/touchedEdgeData.h"
+#include "../touchDetectors/touchedPolygonData.h"
+#include <vector>
 
-class EdgeDragAndDropper {
+class PolygonDragAndDropper {
 public:
-    EdgeDragAndDropper(
-        TouchedEdgeData* touchedEdgeData,
+    PolygonDragAndDropper(
+        TouchedPolygonData* touchedPolygonData,
         LineDrawer* lineDrawer,
         PointDrawer* pointDrawer,
         PolygonsContainer *polygonsContainer,
@@ -20,12 +21,11 @@ public:
     void finish();
 
 private:
-    TouchedEdgeData* touchedEdgeData;
+    TouchedPolygonData* touchedPolygonData;
     LineDrawer* lineDrawer;
     PointDrawer* pointDrawer;
     PolygonsContainer *polygonsContainer;
 
     sf::Vector2i previousMousePosition;
-    sf::Vector2i newStartPointPosition;
-    sf::Vector2i newFinishPointPosition;
+    std::vector<sf::Vector2i> newPoints;
 };

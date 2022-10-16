@@ -7,8 +7,8 @@ EdgeDragAndDropper::EdgeDragAndDropper(
     LineDrawer* lineDrawer,
     PointDrawer* pointDrawer,
     PolygonsContainer *polygonsContainer,
-    Vector2i mousePosition)
-{
+    Vector2i mousePosition
+) {
     this->touchedEdgeData = touchedEdgeData;
     this->lineDrawer = lineDrawer;
     this->pointDrawer = pointDrawer;
