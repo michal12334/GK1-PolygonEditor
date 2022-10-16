@@ -7,7 +7,8 @@ UsingModesManager::UsingModesManager(
     LineDrawer* lineDrawer,
     PolygonsContainer* polygonsContainer,
     PointTouchDetector* pointTouchDetector,
-    EdgeTouchDetector* edgeTouchDetector
+    EdgeTouchDetector* edgeTouchDetector,
+    PolygonTouchDetector* polygonTouchDetector
 )
 {
     this->window = window;
@@ -17,6 +18,7 @@ UsingModesManager::UsingModesManager(
     this->polygonsContainer = polygonsContainer;
     this->pointTouchDetector = pointTouchDetector;
     this->edgeTouchDetector = edgeTouchDetector;
+    this->polygonTouchDetector = polygonTouchDetector;
 
     usingMode = new NormalUsingMode();
     usingModeType = UsingModeType::normal;
@@ -58,7 +60,8 @@ void UsingModesManager::setUsingMode(UsingModeType type) {
                 lineDrawer,
                 polygonsContainer,
                 pointTouchDetector,
-                edgeTouchDetector
+                edgeTouchDetector,
+                polygonTouchDetector
             );
             break;
 

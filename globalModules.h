@@ -10,6 +10,7 @@
 #include "touchDetectors/pointTouchDetector.h"
 #include "touchDetectors/edgeTouchDetector.h"
 #include "usingModes/usingModesManager.h"
+#include "touchDetectors/polygonTouchDetector.h"
 
 class GlobalModules {
 public:
@@ -25,6 +26,7 @@ public:
     PointTouchDetector* getPointTouchDetector();
     EdgeTouchDetector* getEdgeTouchDetector();
     UsingModesManager* getUsingModesManager();
+    PolygonTouchDetector* getPolygonTouchDetector();
 
 private:
     sf::RenderWindow* window = nullptr;
@@ -39,4 +41,5 @@ private:
     PointTouchDetector* pointTouchDetector = nullptr;
     EdgeTouchDetector* edgeTouchDetector = nullptr;
     UsingModesManager* usingModesManager = nullptr;
+    PolygonTouchDetector* polygonTouchDetector = nullptr;
 };

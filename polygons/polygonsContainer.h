@@ -7,6 +7,7 @@
 #include "../drawers/pointDrawer.h"
 #include "../touchDetectors/touchedEdgeData.h"
 #include "../touchDetectors/touchedPointData.h"
+#include "../touchDetectors/touchedPolygonData.h"
 
 class PolygonsContainer {
 public:
@@ -18,6 +19,7 @@ public:
     void updatePolygon(int polygonIndex, int pointIndex, sf::Vector2i newPointValue);
     void setHighlighten(TouchedEdgeData* touchedEdgeData);
     void setHighlighten(TouchedPointData* touchedPointData);
+    void setHighlighten(TouchedPolygonData* touchedPolygonData);
     void clearHighlight();
     bool isEdgeHighlighten();
     void addPointOnHighlightenEdge();

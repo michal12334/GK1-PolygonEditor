@@ -12,6 +12,7 @@
 #include "../dragAndDroppers/pointDragAndDropper.h"
 #include "../touchDetectors/edgeTouchDetector.h"
 #include "../dragAndDroppers/edgeDragAndDropper.h"
+#include "../touchDetectors/polygonTouchDetector.h"
 
 class EditUsingMode : public UsingMode {
 public:
@@ -22,7 +23,8 @@ public:
         LineDrawer* lineDrawer,
         PolygonsContainer* polygonsContainer,
         PointTouchDetector* pointTouchDetector,
-        EdgeTouchDetector* edgeTouchDetector
+        EdgeTouchDetector* edgeTouchDetector,
+        PolygonTouchDetector* polygonTouchDetector
     );
     ~EditUsingMode();
     virtual void update() override;
@@ -49,6 +51,7 @@ private:
     PolygonCreator* polygonCreator;
     PointTouchDetector* pointTouchDetector;
     EdgeTouchDetector* edgeTouchDetector;
+    PolygonTouchDetector* polygonTouchDetector;
     TouchedPointData* touchedPointData = nullptr;
     PointDragAndDropper* pointDragAndDropper = nullptr;
     TouchedEdgeData* touchedEdgeData = nullptr;

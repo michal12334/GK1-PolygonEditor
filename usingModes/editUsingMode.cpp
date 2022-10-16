@@ -9,7 +9,8 @@ EditUsingMode::EditUsingMode(
     LineDrawer* lineDrawer,
     PolygonsContainer* polygonsContainer,
     PointTouchDetector* pointTouchDetector,
-    EdgeTouchDetector* edgeTouchDetector
+    EdgeTouchDetector* edgeTouchDetector,
+    PolygonTouchDetector* polygonTouchDetector
 ) {
     this->window = window;
     this->canvas = canvas;
@@ -18,6 +19,7 @@ EditUsingMode::EditUsingMode(
     this->polygonsContainer = polygonsContainer;
     this->pointTouchDetector = pointTouchDetector;
     this->edgeTouchDetector = edgeTouchDetector;
+    this->polygonTouchDetector = polygonTouchDetector;
     
     polygonCreator = new PolygonCreator(pointDrawer, lineDrawer, canvas, window);
 }
@@ -66,16 +68,22 @@ void EditUsingMode::updateHighlight(Vector2i mousePositionOnCanvas) {
     polygonsContainer->clearHighlight();
     auto currentTouchedPointData = pointTouchDetector->getTouchedPoint(mousePositionOnCanvas);
     auto currentTouchedEdgeData = edgeTouchDetector->getTouchedEdge(mousePositionOnCanvas);
+    auto currentTouchedPolygonData = polygonTouchDetector->getTouchedPolygon(mousePositionOnCanvas);
     if(currentTouchedPointData != nullptr)
         polygonsContainer->setHighlighten(currentTouchedPointData);
     else if(currentTouchedEdgeData != nullptr)
         polygonsContainer->setHighlighten(currentTouchedEdgeData);
+    else if(currentTouchedPolygonData != nullptr)
+        polygonsContainer->setHighlighten(currentTouchedPolygonData);
     
     if(currentTouchedPointData != nullptr)
         delete currentTouchedPointData;
 
     if(currentTouchedEdgeData != nullptr)
         delete currentTouchedEdgeData;
+
+    if(currentTouchedPolygonData != nullptr)
+        delete currentTouchedPolygonData;
 }
 
 void EditUsingMode::doMouseLeftButtonAction(Vector2i mousePositionOnCanvas) {

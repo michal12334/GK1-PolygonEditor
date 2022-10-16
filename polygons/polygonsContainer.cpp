@@ -24,6 +24,8 @@ void PolygonsContainer::draw() {
             polygons[i].drawWithHighlihtenEdge(highlightenEdgeIndex, Color::Red);
         else if(highlightenPolygonIndex == i && highlightenPointIndex != -1)
             polygons[i].drawWithHighlihtenPoint(highlightenPointIndex, Color::Red);
+        else if(highlightenPolygonIndex == i)
+            polygons[i].draw(Color::Red);
         else if(selectedPolygonIndex == i && selectedEdgeIndex != -1)
             polygons[i].drawWithHighlihtenEdge(selectedEdgeIndex, Color::Green);
         else if(selectedPolygonIndex == i && selectedPointIndex != -1)
@@ -49,6 +51,10 @@ void PolygonsContainer::setHighlighten(TouchedEdgeData* touchedEdgeData) {
 void PolygonsContainer::setHighlighten(TouchedPointData* touchedPointData) {
     highlightenPolygonIndex = touchedPointData->polygonIndex;
     highlightenPointIndex = touchedPointData->pointIndex;
+}
+
+void PolygonsContainer::setHighlighten(TouchedPolygonData* touchedPolygonData) {
+    highlightenPolygonIndex = touchedPolygonData->polygonIndex;
 }
 
 void PolygonsContainer::clearHighlight() {

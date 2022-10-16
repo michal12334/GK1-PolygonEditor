@@ -10,6 +10,7 @@
 #include "../polygons/polygonsContainer.h"
 #include "../touchDetectors/pointTouchDetector.h"
 #include "../touchDetectors/edgeTouchDetector.h"
+#include "../touchDetectors/polygonTouchDetector.h"
 
 class UsingModesManager {
 public:
@@ -20,7 +21,8 @@ public:
         LineDrawer* lineDrawer,
         PolygonsContainer* polygonsContainer,
         PointTouchDetector* pointTouchDetector,
-        EdgeTouchDetector* edgeTouchDetector
+        EdgeTouchDetector* edgeTouchDetector,
+        PolygonTouchDetector* polygonTouchDetector
     );
     ~UsingModesManager();
     void drawCurrentUsingMode();
@@ -44,4 +46,5 @@ private:
     PolygonsContainer* polygonsContainer;
     PointTouchDetector* pointTouchDetector;
     EdgeTouchDetector* edgeTouchDetector;
+    PolygonTouchDetector* polygonTouchDetector;
 };
