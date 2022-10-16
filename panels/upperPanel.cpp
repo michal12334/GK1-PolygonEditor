@@ -2,8 +2,15 @@
 
 using namespace sf;
 
-UpperPanel::UpperPanel(Window* window, Vector2f size, Vector2f position, float padding) {
+UpperPanel::UpperPanel(
+    Window* window,
+    UsingModesManager* usingModesManager,
+    Vector2f size,
+    Vector2f position,
+    float padding
+) {
     this->window = window;
+    this->usingModesManager = usingModesManager;
     this->size = size;
     this->position = position;
     color = Color::Cyan;
@@ -34,14 +41,17 @@ void UpperPanel::update() {
                 normalModeButton->setActive(true);
                 polygonEditModeButton->setActive(false);
                 relationAddModeButton->setActive(false);
+                usingModesManager->setUsingMode(UsingModesManager::UsingModeType::normal);
             } else if(polygonEditModeButton->isTouched(window) && !polygonEditModeButton->isActive()) {
                 normalModeButton->setActive(false);
                 polygonEditModeButton->setActive(true);
                 relationAddModeButton->setActive(false);
+                usingModesManager->setUsingMode(UsingModesManager::UsingModeType::edit);
             } else if(relationAddModeButton->isTouched(window) && !relationAddModeButton->isActive()) {
                 normalModeButton->setActive(false);
                 polygonEditModeButton->setActive(false);
                 relationAddModeButton->setActive(true);
+                usingModesManager->setUsingMode(UsingModesManager::UsingModeType::relation);
             }
         }
         isMouseLeftButtonPressed = true;

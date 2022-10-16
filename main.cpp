@@ -11,18 +11,18 @@ int main() {
     auto upperPanel = globalModules.getUpperPanel();
     auto canvas = globalModules.getCanvas();
     auto polygons = globalModules.getPolygonsContainer();
-    EditUsingMode editUsingMode(window, canvas, globalModules.getPointDrawer(), globalModules.getLineDrawer(), globalModules.getPolygonsContainer(), globalModules.getPointTouchDetector(), globalModules.getEdgeTouchDetector());
+    auto usingModesManager = globalModules.getUsingModesManager();
 
     sf::Event event;
     while (window->isOpen()) {
-        editUsingMode.update();
+        usingModesManager->updateCurrentUsingMode();
         upperPanel->update();
 
         window->clear();
         window->draw(*upperPanel);
         canvas->clear();
         polygons->draw();
-        editUsingMode.draw();
+        usingModesManager->drawCurrentUsingMode();
         canvas->updateTexture();
         window->draw(*canvas);
         window->display();

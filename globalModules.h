@@ -9,6 +9,7 @@
 #include "polygons/polygonsContainer.h"
 #include "touchDetectors/pointTouchDetector.h"
 #include "touchDetectors/edgeTouchDetector.h"
+#include "usingModes/usingModesManager.h"
 
 class GlobalModules {
 public:
@@ -23,23 +24,12 @@ public:
     PolygonsContainer* getPolygonsContainer();
     PointTouchDetector* getPointTouchDetector();
     EdgeTouchDetector* getEdgeTouchDetector();
-
-    enum class UsingModeType {
-        normal,
-        edit,
-        relation
-    };
-
-    UsingModeType getUsingModeType();
-    void setUsingMode(UsingModeType usingModeType);
+    UsingModesManager* getUsingModesManager();
 
 private:
     sf::RenderWindow* window = nullptr;
     const int WINDOW_WIDTH = 1200;
     const int WINDOW_HEIGHT = 900;
-
-    UsingModeType usingModeType = UsingModeType::normal;
-    UsingMode* usingMode = nullptr;
 
     UpperPanel* upperPanel = nullptr;
     Canvas* canvas = nullptr;
@@ -48,4 +38,5 @@ private:
     PolygonsContainer* polygonsContainer = nullptr;
     PointTouchDetector* pointTouchDetector = nullptr;
     EdgeTouchDetector* edgeTouchDetector = nullptr;
+    UsingModesManager* usingModesManager = nullptr;
 };

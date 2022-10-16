@@ -5,15 +5,11 @@
 using namespace sf;
 
 GlobalModules::GlobalModules() {
-    usingMode = new NormalUsingMode();
 }
 
 GlobalModules::~GlobalModules() {
     if(window != nullptr)
         delete window;
-
-    if(usingMode != nullptr)
-        delete usingMode;
 
     if(upperPanel != nullptr)
         delete upperPanel;
@@ -35,6 +31,9 @@ GlobalModules::~GlobalModules() {
 
     if(edgeTouchDetector != nullptr)
         delete edgeTouchDetector;
+
+    if(usingModesManager != nullptr)
+        delete usingModesManager;
 }
 
 RenderWindow* GlobalModules::getWindow() {
@@ -50,7 +49,7 @@ int GlobalModules::getWindowWidth() {
 
 UpperPanel* GlobalModules::getUpperPanel() {
     if(upperPanel == nullptr)
-        upperPanel = new UpperPanel(getWindow(), Vector2f(getWindowWidth(), 40));
+        upperPanel = new UpperPanel(getWindow(), getUsingModesManager(), Vector2f(getWindowWidth(), 40));
 
     return upperPanel;
 }
@@ -97,23 +96,17 @@ EdgeTouchDetector* GlobalModules::getEdgeTouchDetector() {
     return edgeTouchDetector;
 }
 
-GlobalModules::UsingModeType GlobalModules::getUsingModeType() {
-    return usingModeType;
-}
-
-void GlobalModules::setUsingMode(GlobalModules::UsingModeType usingModeType) {
-    if(this->usingModeType == usingModeType)
-        return;
+UsingModesManager* GlobalModules::getUsingModesManager() {
+    if(usingModesManager == nullptr)
+        usingModesManager = new UsingModesManager(
+            getWindow(),
+            getCanvas(),
+            getPointDrawer(),
+            getLineDrawer(),
+            getPolygonsContainer(),
+            getPointTouchDetector(),
+            getEdgeTouchDetector()
+        );
     
-    this->usingModeType = usingModeType;
-    delete usingMode;
-    switch(usingModeType) {
-        case UsingModeType::normal:
-            usingMode = new NormalUsingMode();
-            break;
-
-        case UsingModeType::edit:
-            //usingMode = new EditUsingMode();
-            break;
-    }
+    return usingModesManager;
 }

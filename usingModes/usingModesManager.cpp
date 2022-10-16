@@ -40,6 +40,9 @@ void UsingModesManager::setUsingMode(UsingModeType type) {
     
     usingModeType = type;
 
+    polygonsContainer->clearHighlight();
+    polygonsContainer->clearSelection();
+
     switch(usingModeType) {
         case UsingModeType::normal:
             delete usingMode;
