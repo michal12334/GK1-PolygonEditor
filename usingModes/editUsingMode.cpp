@@ -68,6 +68,10 @@ void EditUsingMode::updateHighlight(Vector2i mousePositionOnCanvas) {
         return;
 
     polygonsContainer->clearHighlight();
+
+    if(pointDragAndDropper != nullptr || edgeDragAndDropper != nullptr || polygonDragAndDropper != nullptr)
+        return;
+
     auto currentTouchedPointData = pointTouchDetector->getTouchedPoint(mousePositionOnCanvas);
     auto currentTouchedEdgeData = edgeTouchDetector->getTouchedEdge(mousePositionOnCanvas);
     auto currentTouchedPolygonData = polygonTouchDetector->getTouchedPolygon(mousePositionOnCanvas);
