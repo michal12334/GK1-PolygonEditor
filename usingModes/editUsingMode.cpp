@@ -140,6 +140,7 @@ void EditUsingMode::doMouseLeftButtonAction(Vector2i mousePositionOnCanvas) {
             touchedEdgeData = nullptr;
         } else if(polygonDragAndDropper != nullptr) {
             polygonDragAndDropper->finish();
+            polygonsContainer->setSelection(touchedPolygonData);
             delete polygonDragAndDropper;
             delete touchedPolygonData;
             polygonDragAndDropper = nullptr;

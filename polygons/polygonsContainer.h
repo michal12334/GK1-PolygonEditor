@@ -25,6 +25,7 @@ public:
     void addPointOnHighlightenEdge();
     void setSelection(TouchedEdgeData* touchedEdgeData);
     void setSelection(TouchedPointData* touchedPointData);
+    void setSelection(TouchedPolygonData* touchedPolygonData);
     void clearSelection();
     void deleteSelected();
     bool isSomethingSelected();

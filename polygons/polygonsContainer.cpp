@@ -30,6 +30,8 @@ void PolygonsContainer::draw() {
             polygons[i].drawWithHighlihtenEdge(selectedEdgeIndex, Color::Green);
         else if(selectedPolygonIndex == i && selectedPointIndex != -1)
             polygons[i].drawWithHighlihtenPoint(selectedPointIndex, Color::Green);
+        else if(selectedPolygonIndex == i)
+            polygons[i].draw(Color::Green);
         else
             polygons[i].draw();
     }
@@ -83,6 +85,11 @@ void PolygonsContainer::setSelection(TouchedPointData* touchedPointData) {
     selectedPointIndex = touchedPointData->pointIndex;
 }
 
+void PolygonsContainer::setSelection(TouchedPolygonData* touchedPolygonData) {
+    clearHighlight();
+    selectedPolygonIndex = touchedPolygonData->polygonIndex;
+}
+
 void PolygonsContainer::clearSelection() {
     selectedPolygonIndex = -1;
     selectedPointIndex = -1;
@@ -98,6 +105,8 @@ void PolygonsContainer::deleteSelected() {
     } else if(selectedEdgeIndex != -1) {
         polygons[selectedPolygonIndex].deletePoint(selectedEdgeIndex);
         polygons[selectedPolygonIndex].deletePoint(selectedEdgeIndex % polygons[selectedPolygonIndex].getPoints().size());
+    } else {
+        polygons.erase(polygons.begin() + selectedPolygonIndex);
     }
 
     if(polygons[selectedPolygonIndex].getPoints().size() < 3) {
