@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 class Canvas : public sf::Drawable {
 public:
@@ -10,6 +11,7 @@ public:
     sf::Vector2i getSize();
     void updateTexture();
     void clear();
+    void drawNative(sf::Drawable* drawable);
 
 private:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
@@ -19,4 +21,6 @@ private:
     sf::Image image;
     sf::Texture texture;
     sf::Sprite sprite;
+
+    std::vector<sf::Drawable*> drawables;
 };

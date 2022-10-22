@@ -34,8 +34,16 @@ void Canvas::clear() {
     for(int x = 0; x < size.x; x++)
         for(int y = 0; y < size.y; y++)
             setPixel(x, y, Color::White);
+    drawables.clear();
+}
+
+void Canvas::drawNative(Drawable* drawable) {
+    drawables.push_back(drawable);
 }
 
 void Canvas::draw(RenderTarget &target, RenderStates states) const {
     target.draw(sprite, states);
+    for(const auto& d : drawables) {
+        target.draw(*d, states);
+    }
 }
