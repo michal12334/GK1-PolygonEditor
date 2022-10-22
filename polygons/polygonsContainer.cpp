@@ -140,7 +140,7 @@ void PolygonsContainer::setEdgeLength(TouchedEdgeData* touchedEdgeData) {
     setEdgeLength(touchedEdgeData, len);
 }
 
-void PolygonsContainer::drawLen(PolygonsContainer::EdgeLength edgeLength) {
+void PolygonsContainer::drawLen(EdgeLength edgeLength) {
     auto points = polygons[edgeLength.polygonIndex].getPoints();
     auto position = (points[edgeLength.edgeIndex] + points[(edgeLength.edgeIndex + 1) % points.size()]) / 2;
     Text* text = new Text();

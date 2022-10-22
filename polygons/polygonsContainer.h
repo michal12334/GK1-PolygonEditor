@@ -9,6 +9,7 @@
 #include "../touchDetectors/touchedPointData.h"
 #include "../touchDetectors/touchedPolygonData.h"
 #include <string>
+#include "../relations/edgeLength.h"
 
 class PolygonsContainer {
 public:
@@ -48,14 +49,6 @@ private:
     int selectedPointIndex;
     int selectedEdgeIndex;
 
-    struct EdgeLength {
-        EdgeLength(int polygonIndex, int edgeIndex, float len)
-        : polygonIndex(polygonIndex), edgeIndex(edgeIndex), len(len) {}
-
-        int polygonIndex;
-        int edgeIndex;
-        float len;
-    };
     std::vector<EdgeLength> lengths;
     void drawLen(EdgeLength edgeLength);
     sf::Font font;
