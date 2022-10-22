@@ -8,10 +8,11 @@
 #include "../touchDetectors/touchedEdgeData.h"
 #include "../touchDetectors/touchedPointData.h"
 #include "../touchDetectors/touchedPolygonData.h"
+#include <string>
 
 class PolygonsContainer {
 public:
-    PolygonsContainer(LineDrawer* lineDrawer, PointDrawer* pointDrawer);
+    PolygonsContainer(LineDrawer* lineDrawer, PointDrawer* pointDrawer, Canvas* canvas);
     void addPolygon(Polygon polygon);
     void addPolygon(std::vector<sf::Vector2i> points);
     void draw();
@@ -36,6 +37,7 @@ private:
     std::vector<Polygon> polygons;
     LineDrawer* lineDrawer;
     PointDrawer* pointDrawer;
+    Canvas* canvas;
 
     int highlightenPolygonIndex;
     int highlightenPointIndex;
@@ -54,4 +56,9 @@ private:
         float len;
     };
     std::vector<EdgeLength> lengths;
+    void drawLen(EdgeLength edgeLength);
+    sf::Font font;
+
+    template<typename T>
+    std::string numberToString(T num);
 };

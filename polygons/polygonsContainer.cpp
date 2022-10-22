@@ -1,13 +1,16 @@
 #include "polygonsContainer.h"
 #include <iostream>
+#include <sstream>
 
 using namespace sf;
 using namespace std;
 
-PolygonsContainer::PolygonsContainer(LineDrawer* lineDrawer, PointDrawer* pointDrawer) {
+PolygonsContainer::PolygonsContainer(LineDrawer* lineDrawer, PointDrawer* pointDrawer, Canvas* canvas) {
     this->lineDrawer = lineDrawer;
     this->pointDrawer = pointDrawer;
+    this->canvas = canvas;
     clearHighlight();
+    font.loadFromFile("fonts/FuzzyBubbles-Regular.ttf");
 }
 
 void PolygonsContainer::addPolygon(Polygon polygon) {
@@ -34,6 +37,10 @@ void PolygonsContainer::draw() {
             polygons[i].draw(Color::Green);
         else
             polygons[i].draw();
+    }
+
+    for(const auto& len : lengths) {
+        drawLen(len);
     }
 }
 
@@ -127,4 +134,23 @@ void PolygonsContainer::setEdgeLength(TouchedEdgeData* touchedEdgeData, float le
 void PolygonsContainer::setEdgeLength(TouchedEdgeData* touchedEdgeData) {
     float len = polygons[touchedEdgeData->polygonIndex].getEdgeLength(touchedEdgeData->startPointIndex);
     setEdgeLength(touchedEdgeData, len);
+}
+
+void PolygonsContainer::drawLen(PolygonsContainer::EdgeLength edgeLength) {
+    auto points = polygons[edgeLength.polygonIndex].getPoints();
+    auto position = (points[edgeLength.edgeIndex] + points[(edgeLength.edgeIndex + 1) % points.size()]) / 2;
+    Text* text = new Text();
+    text->setFont(font);
+    text->setCharacterSize(20);
+    text->setPosition(Vector2f(position.x, position.y));
+    text->setString(numberToString(edgeLength.len));
+    text->setFillColor(sf::Color::Black);
+    canvas->drawNative(text);
+}
+
+template<typename T>
+string PolygonsContainer::numberToString(T num) {
+    ostringstream stream;
+    stream << num;
+    return stream.str();
 }
