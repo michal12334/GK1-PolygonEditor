@@ -26,6 +26,7 @@ private:
     PolygonsContainer *polygonsContainer;
 
     sf::Vector2i previousMousePosition;
-    sf::Vector2i newStartPointPosition;
-    sf::Vector2i newFinishPointPosition;
+    Polygon newPolygon;
+
+    sf::Vector2f getVersor(sf::Vector2f a, sf::Vector2f b);
 };
