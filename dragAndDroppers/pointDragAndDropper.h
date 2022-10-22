@@ -21,4 +21,6 @@ private:
 
     sf::Vector2i previousMousePosition;
     Polygon newPolygon;
+
+    sf::Vector2f getVersor(sf::Vector2f a, sf::Vector2f b);
 };

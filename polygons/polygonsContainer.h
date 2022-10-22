@@ -34,6 +34,7 @@ public:
     bool isSomethingSelected();
     void setEdgeLength(TouchedEdgeData* touchedEdgeData, float len);
     void setEdgeLength(TouchedEdgeData* touchedEdgeData);
+    std::vector<EdgeLength> getLengthByPolygon(int polygonIndex);
 
 private:
     std::vector<Polygon> polygons;
