@@ -7,23 +7,21 @@ PointDragAndDropper::PointDragAndDropper(TouchedPointData* touchedPointData, Lin
     this->lineDrawer = lineDrawer;
     this->pointDrawer = pointDrawer;
     this->polygonsContainer = polygonsContainer;
-    newPointPosition = mousePositionOnCanvas;
+    previousMousePosition = mousePositionOnCanvas;
+    newPolygon = polygonsContainer->getPolygons()[touchedPointData->polygonIndex];
 }
 
 void PointDragAndDropper::update(Vector2i mousePositionOnCanvas) {
-    newPointPosition = mousePositionOnCanvas;
+    auto delta = mousePositionOnCanvas - previousMousePosition;
+    previousMousePosition = mousePositionOnCanvas;
+    auto points = newPolygon.getPoints();
+    newPolygon.updatePoint(touchedPointData->pointIndex, points[touchedPointData->pointIndex] + delta);
 }
 
 void PointDragAndDropper::draw() {
-    pointDrawer->draw(newPointPosition, Color::Green);
-
-    auto points = touchedPointData->polygon.getPoints();
-    int prev = (touchedPointData->pointIndex - 1 + points.size()) % points.size();
-    int next = (touchedPointData->pointIndex + 1) % points.size();
-    lineDrawer->draw(newPointPosition, points[prev], Color::Green);
-    lineDrawer->draw(newPointPosition, points[next], Color::Green);
+    newPolygon.draw(Color::Green);
 }
 
 void PointDragAndDropper::finish() {
-    polygonsContainer->updatePolygon(touchedPointData->polygonIndex, touchedPointData->pointIndex, newPointPosition);
+    polygonsContainer->updatePolygon(touchedPointData->polygonIndex, newPolygon);
 }

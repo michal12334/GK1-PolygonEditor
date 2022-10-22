@@ -19,5 +19,6 @@ private:
     PointDrawer* pointDrawer;
     PolygonsContainer *polygonsContainer;
 
-    sf::Vector2i newPointPosition;
+    sf::Vector2i previousMousePosition;
+    Polygon newPolygon;
 };

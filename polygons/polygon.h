@@ -8,6 +8,7 @@
 
 class Polygon {
 public:
+    Polygon() = default;
     Polygon(const std::vector<sf::Vector2i>& points, PointDrawer* pointDrawer, LineDrawer* lineDrawer);
     void draw(sf::Color color = sf::Color::Black);
     void drawWithHighlihtenPoint(int pointIndex, sf::Color color);
@@ -20,6 +21,6 @@ public:
 
 private:
     std::vector<sf::Vector2i> points;
-    PointDrawer* pointDrawer;
-    LineDrawer* lineDrawer;
+    PointDrawer* pointDrawer = nullptr;
+    LineDrawer* lineDrawer = nullptr;
 };

@@ -52,6 +52,10 @@ void PolygonsContainer::updatePolygon(int polygonIndex, int pointIndex, Vector2i
     polygons[polygonIndex].updatePoint(pointIndex, newPointValue);
 }
 
+void PolygonsContainer::updatePolygon(int polygonIndex, Polygon newPolygonValue) {
+    polygons[polygonIndex] = newPolygonValue;
+}
+
 void PolygonsContainer::setHighlighten(TouchedEdgeData* touchedEdgeData) {
     highlightenPolygonIndex = touchedEdgeData->polygonIndex;
     highlightenEdgeIndex = touchedEdgeData->startPointIndex;
