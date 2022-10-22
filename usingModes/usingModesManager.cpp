@@ -66,6 +66,13 @@ void UsingModesManager::setUsingMode(UsingModeType type) {
             break;
 
         case UsingModeType::relation:
+            delete usingMode;
+            usingMode = new RelationUsingMode(
+                window,
+                canvas,
+                edgeTouchDetector,
+                polygonsContainer
+            );
             break;
     }
 }

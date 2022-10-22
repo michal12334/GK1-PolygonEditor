@@ -3,6 +3,7 @@
 #include "usingMode.h"
 #include "normalUsingMode.h"
 #include "editUsingMode.h"
+#include "relationUsingMode.h"
 #include "../canvases/canvas.h"
 #include <SFML/Graphics.hpp>
 #include "../drawers/pointDrawer.h"
