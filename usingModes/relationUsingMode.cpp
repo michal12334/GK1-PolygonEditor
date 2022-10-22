@@ -23,7 +23,19 @@ void RelationUsingMode::update() {
     auto touchedEdgeData = edgeTouchDetector->getTouchedEdge(mousePositionOnCanvas);
     if(touchedEdgeData != nullptr) {
         polygonsContainer->setHighlighten(touchedEdgeData);
+    } else {
+        return;
     }
+
+    if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
+        isMouseLeftButtonPressed = true;
+        polygonsContainer->setEdgeLength(touchedEdgeData);
+    } else if(!Mouse::isButtonPressed(Mouse::Button::Left)) {
+        isMouseLeftButtonPressed = false;
+    }
+
+    if(touchedEdgeData != nullptr)
+        delete touchedEdgeData;
 }
 
 void RelationUsingMode::draw() {

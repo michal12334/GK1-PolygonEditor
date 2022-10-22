@@ -20,6 +20,8 @@ private:
     sf::Vector2i getMousePositionOnCanvas();
     bool isMouseOnCanvas(sf::Vector2i mousePositionOnCanvas);
 
+    bool isMouseLeftButtonPressed = false;
+
     sf::Window* window;
     Canvas* canvas;
     EdgeTouchDetector* edgeTouchDetector;

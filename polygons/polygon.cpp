@@ -1,5 +1,5 @@
 #include "polygon.h"
-#include <iostream>
+#include <cmath>
 
 using namespace sf;
 using namespace std;
@@ -53,4 +53,13 @@ void Polygon::addPointOnEdge(int edgeIndex) {
 
 void Polygon::deletePoint(int index) {
     points.erase(points.begin() + index);
+}
+
+float Polygon::getEdgeLength(int edgeIndex) {
+    auto a = points[edgeIndex];
+    auto b = points[(edgeIndex + 1) % points.size()];
+    return sqrt(
+        (a.x - b.x) * (a.x - b.x) +
+        (a.y - b.y) * (a.y - b.y)
+    );
 }

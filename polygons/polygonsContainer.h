@@ -29,6 +29,8 @@ public:
     void clearSelection();
     void deleteSelected();
     bool isSomethingSelected();
+    void setEdgeLength(TouchedEdgeData* touchedEdgeData, float len);
+    void setEdgeLength(TouchedEdgeData* touchedEdgeData);
 
 private:
     std::vector<Polygon> polygons;
@@ -42,4 +44,14 @@ private:
     int selectedPolygonIndex;
     int selectedPointIndex;
     int selectedEdgeIndex;
+
+    struct EdgeLength {
+        EdgeLength(int polygonIndex, int edgeIndex, float len)
+        : polygonIndex(polygonIndex), edgeIndex(edgeIndex), len(len) {}
+
+        int polygonIndex;
+        int edgeIndex;
+        float len;
+    };
+    std::vector<EdgeLength> lengths;
 };

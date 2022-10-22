@@ -119,3 +119,12 @@ void PolygonsContainer::deleteSelected() {
 bool PolygonsContainer::isSomethingSelected() {
     return selectedPolygonIndex != -1;
 }
+
+void PolygonsContainer::setEdgeLength(TouchedEdgeData* touchedEdgeData, float len) {
+    lengths.push_back(EdgeLength(touchedEdgeData->polygonIndex, touchedEdgeData->startPointIndex, len));
+}
+
+void PolygonsContainer::setEdgeLength(TouchedEdgeData* touchedEdgeData) {
+    float len = polygons[touchedEdgeData->polygonIndex].getEdgeLength(touchedEdgeData->startPointIndex);
+    setEdgeLength(touchedEdgeData, len);
+}
