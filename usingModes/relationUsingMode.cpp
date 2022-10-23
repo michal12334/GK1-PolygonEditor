@@ -1,6 +1,7 @@
 #include "relationUsingMode.h"
 
 using namespace sf;
+using namespace std;
 
 RelationUsingMode::RelationUsingMode(
     Window* window,
@@ -14,32 +15,64 @@ RelationUsingMode::RelationUsingMode(
     this->polygonsContainer = polygonsContainer;
 }
 
-void RelationUsingMode::update() {
-    auto mousePositionOnCanvas = getMousePositionOnCanvas();
-    if(!isMouseOnCanvas(mousePositionOnCanvas))
-        return;
-
-    polygonsContainer->clearHighlight();
-    auto touchedEdgeData = edgeTouchDetector->getTouchedEdge(mousePositionOnCanvas);
-    if(touchedEdgeData != nullptr) {
-        polygonsContainer->setHighlighten(touchedEdgeData);
-    } else {
-        return;
-    }
-
-    if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
-        isMouseLeftButtonPressed = true;
-        auto len = polygonsContainer->getPolygons()[touchedEdgeData->polygonIndex].getEdgeLength(touchedEdgeData->startPointIndex);
-        polygonsContainer->setEdgeLength(touchedEdgeData, len);
-    } else if(!Mouse::isButtonPressed(Mouse::Button::Left)) {
-        isMouseLeftButtonPressed = false;
-    }
+RelationUsingMode::~RelationUsingMode() {
+    if(textBox != nullptr)
+        delete textBox;
 
     if(touchedEdgeData != nullptr)
         delete touchedEdgeData;
 }
 
+void RelationUsingMode::update() {
+    auto mousePositionOnCanvas = getMousePositionOnCanvas();
+    if(!isMouseOnCanvas(mousePositionOnCanvas))
+        return;
+
+    if(textBox != nullptr)
+        textBox->update();
+
+    if(textBox == nullptr) {
+        polygonsContainer->clearHighlight();
+        touchedEdgeData = nullptr;
+        auto currentTouchedEdgeData = edgeTouchDetector->getTouchedEdge(mousePositionOnCanvas);
+        if(currentTouchedEdgeData != nullptr) {
+            polygonsContainer->setHighlighten(currentTouchedEdgeData);
+            touchedEdgeData = currentTouchedEdgeData;
+        } else {
+            return;
+        }
+    }
+
+    if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
+        isMouseLeftButtonPressed = true;
+        if(touchedEdgeData != nullptr && textBox == nullptr) {
+            auto len = polygonsContainer->getPolygons()[touchedEdgeData->polygonIndex].getEdgeLength(touchedEdgeData->startPointIndex);
+            auto points = polygonsContainer->getPolygons()[touchedEdgeData->polygonIndex].getPoints();
+            auto position = (points[touchedEdgeData->startPointIndex] + points[touchedEdgeData->finishPointIndex]) / 2;
+            textBox = new TextBox(len, Vector2f(position), 20);
+        }
+    } else if(!Mouse::isButtonPressed(Mouse::Button::Left)) {
+        isMouseLeftButtonPressed = false;
+    }
+
+    if(!isEnterKeyPressed && Keyboard::isKeyPressed(Keyboard::Key::Enter)) {
+        isEnterKeyPressed = true;
+        if(textBox != nullptr) {
+            auto len = textBox->getValue();
+            polygonsContainer->setEdgeLength(touchedEdgeData, len);
+            delete textBox;
+            delete touchedEdgeData;
+            textBox = nullptr;
+            touchedEdgeData = nullptr;
+        }
+    } else if(!Keyboard::isKeyPressed(Keyboard::Key::Enter)) {
+        isEnterKeyPressed = false;
+    }
+}
+
 void RelationUsingMode::draw() {
+    if(textBox != nullptr)
+        textBox->draw(canvas);
 }
 
 Vector2i RelationUsingMode::getMousePositionOnCanvas() {
