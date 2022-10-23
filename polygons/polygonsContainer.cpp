@@ -149,6 +149,15 @@ vector<EdgeLength> PolygonsContainer::getLengthByPolygon(int polygonIndex) {
     return result;
 }
 
+void PolygonsContainer::removeEdgeLength(TouchedEdgeData* touchedEdgeData) {
+    for(int i = 0; i < lengths.size(); i++) {
+        if(lengths[i].edgeIndex == touchedEdgeData->startPointIndex) {
+            lengths.erase(lengths.begin() + i);
+            break;
+        }
+    }
+}
+
 void PolygonsContainer::drawLen(EdgeLength edgeLength) {
     auto points = polygons[edgeLength.polygonIndex].getPoints();
     auto position = (points[edgeLength.edgeIndex] + points[(edgeLength.edgeIndex + 1) % points.size()]) / 2;

@@ -35,6 +35,7 @@ public:
     void setEdgeLength(TouchedEdgeData* touchedEdgeData, float len);
     void setEdgeLength(TouchedEdgeData* touchedEdgeData);
     std::vector<EdgeLength> getLengthByPolygon(int polygonIndex);
+    void removeEdgeLength(TouchedEdgeData* touchedEdgeData);
 
 private:
     std::vector<Polygon> polygons;

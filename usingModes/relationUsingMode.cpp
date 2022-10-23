@@ -49,6 +49,7 @@ void RelationUsingMode::update() {
             auto len = polygonsContainer->getPolygons()[touchedEdgeData->polygonIndex].getEdgeLength(touchedEdgeData->startPointIndex);
             auto points = polygonsContainer->getPolygons()[touchedEdgeData->polygonIndex].getPoints();
             auto position = (points[touchedEdgeData->startPointIndex] + points[touchedEdgeData->finishPointIndex]) / 2;
+            polygonsContainer->removeEdgeLength(touchedEdgeData);
             textBox = new TextBox(len, Vector2f(position), 20);
         }
     } else if(!Mouse::isButtonPressed(Mouse::Button::Left)) {
