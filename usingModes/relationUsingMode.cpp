@@ -29,7 +29,8 @@ void RelationUsingMode::update() {
 
     if(!isMouseLeftButtonPressed && Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = true;
-        polygonsContainer->setEdgeLength(touchedEdgeData);
+        auto len = polygonsContainer->getPolygons()[touchedEdgeData->polygonIndex].getEdgeLength(touchedEdgeData->startPointIndex);
+        polygonsContainer->setEdgeLength(touchedEdgeData, len);
     } else if(!Mouse::isButtonPressed(Mouse::Button::Left)) {
         isMouseLeftButtonPressed = false;
     }
