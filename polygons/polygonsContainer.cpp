@@ -82,7 +82,14 @@ bool PolygonsContainer::isEdgeHighlighten() {
 }
 
 void PolygonsContainer::addPointOnHighlightenEdge() {
+    removeEdgeLength(highlightenPolygonIndex, highlightenEdgeIndex);
     polygons[highlightenPolygonIndex].addPointOnEdge(highlightenEdgeIndex);
+    int size = polygons[highlightenPolygonIndex].getPoints().size();
+    for(int i = 0; i < lengths.size(); i++) {
+        if(lengths[i].polygonIndex == highlightenPolygonIndex && lengths[i].edgeIndex > highlightenEdgeIndex) {
+            lengths[i].edgeIndex = (lengths[i].edgeIndex + 1) % size;
+        }
+    }
 }
 
 void PolygonsContainer::setSelection(TouchedEdgeData* touchedEdgeData) {
@@ -113,15 +120,36 @@ void PolygonsContainer::deleteSelected() {
         return;
 
     if(selectedPointIndex != -1) {
+        int size = polygons[selectedPolygonIndex].getPoints().size();
+        removeEdgeLength(selectedPolygonIndex, selectedPointIndex);
+        removeEdgeLength(selectedPolygonIndex, (selectedPointIndex - 1 + size) % size);
+        size--;
+        for(int i = 0; i < lengths.size(); i++) {
+            if(lengths[i].polygonIndex == selectedPolygonIndex && lengths[i].edgeIndex > selectedPointIndex) {
+                lengths[i].edgeIndex = (lengths[i].edgeIndex - 1 + size) % size;
+            }
+        }
         polygons[selectedPolygonIndex].deletePoint(selectedPointIndex);
     } else if(selectedEdgeIndex != -1) {
+        int size = polygons[selectedPolygonIndex].getPoints().size();
+        removeEdgeLength(selectedPolygonIndex, selectedEdgeIndex);
+        removeEdgeLength(selectedPolygonIndex, (selectedEdgeIndex - 1 + size) % size);
+        removeEdgeLength(selectedPolygonIndex, (selectedEdgeIndex + 1) % size);
+        size -= 2;
+        for(int i = 0; i < lengths.size(); i++) {
+            if(lengths[i].polygonIndex == selectedPolygonIndex && lengths[i].edgeIndex > selectedEdgeIndex + 1) {
+                lengths[i].edgeIndex = (lengths[i].edgeIndex - 2 + size) % size;
+            }
+        }
         polygons[selectedPolygonIndex].deletePoint(selectedEdgeIndex);
-        polygons[selectedPolygonIndex].deletePoint(selectedEdgeIndex % polygons[selectedPolygonIndex].getPoints().size());
+        polygons[selectedPolygonIndex].deletePoint(selectedEdgeIndex % size);
     } else {
+        removeEdgeLengthsByPolygon(selectedPolygonIndex);
         polygons.erase(polygons.begin() + selectedPolygonIndex);
     }
 
     if(polygons[selectedPolygonIndex].getPoints().size() < 3) {
+        removeEdgeLengthsByPolygon(selectedPolygonIndex);
         polygons.erase(polygons.begin() + selectedPolygonIndex);
     }
 
@@ -187,6 +215,24 @@ void PolygonsContainer::removeEdgeLength(TouchedEdgeData* touchedEdgeData) {
         if(lengths[i].edgeIndex == touchedEdgeData->startPointIndex && lengths[i].polygonIndex == touchedEdgeData->polygonIndex) {
             lengths.erase(lengths.begin() + i);
             break;
+        }
+    }
+}
+
+void PolygonsContainer::removeEdgeLength(int polygonIndex, int edgeIndex) {
+    for(int i = 0; i < lengths.size(); i++) {
+        if(lengths[i].edgeIndex == edgeIndex && lengths[i].polygonIndex == polygonIndex) {
+            lengths.erase(lengths.begin() + i);
+            break;
+        }
+    }
+}
+
+void PolygonsContainer::removeEdgeLengthsByPolygon(int polygonIndex) {
+    for(int i = 0; i < lengths.size(); i++) {
+        if(lengths[i].polygonIndex == polygonIndex) {
+            lengths.erase(lengths.begin() + i);
+            i--;
         }
     }
 }
