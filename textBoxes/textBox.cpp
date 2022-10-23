@@ -1,5 +1,6 @@
 #include "textBox.h"
 #include <sstream>
+#include "../globalModules.h"
 
 using namespace std;
 using namespace sf;
@@ -32,7 +33,7 @@ TextBox::~TextBox() {
 }
 
 void TextBox::update() {
-    time += SPEED;
+    time += SPEED * GlobalModules::DELTA_TIME;
     if(time >= TIME) {
         time = 0;
         isVisible = !isVisible;

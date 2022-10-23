@@ -28,6 +28,9 @@ public:
     UsingModesManager* getUsingModesManager();
     PolygonTouchDetector* getPolygonTouchDetector();
 
+    static const int FRAME_RATE;
+    static const float DELTA_TIME;
+
 private:
     sf::RenderWindow* window = nullptr;
     const int WINDOW_WIDTH = 1200;

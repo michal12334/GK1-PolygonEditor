@@ -4,6 +4,9 @@
 
 using namespace sf;
 
+const int GlobalModules::FRAME_RATE = 60;
+const float GlobalModules::DELTA_TIME = 1.0f / (float)GlobalModules::FRAME_RATE;
+
 GlobalModules::GlobalModules() {
 }
 
@@ -42,6 +45,7 @@ GlobalModules::~GlobalModules() {
 RenderWindow* GlobalModules::getWindow() {
     if(window == nullptr) {
         window = new RenderWindow(sf::VideoMode(1200, 900), "title");
+        window->setFramerateLimit(FRAME_RATE);
     }
     return window;
 }

@@ -15,7 +15,7 @@ public:
 
 private:
     const float TIME = 0.5f;
-    const float SPEED = 0.1f;
+    const float SPEED = 2.0f;
     float time = 0.0f;
     bool isVisible = false;
 
