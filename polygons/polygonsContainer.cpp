@@ -184,7 +184,7 @@ vector<EdgeLength> PolygonsContainer::getLengthByPolygon(int polygonIndex) {
 
 void PolygonsContainer::removeEdgeLength(TouchedEdgeData* touchedEdgeData) {
     for(int i = 0; i < lengths.size(); i++) {
-        if(lengths[i].edgeIndex == touchedEdgeData->startPointIndex) {
+        if(lengths[i].edgeIndex == touchedEdgeData->startPointIndex && lengths[i].polygonIndex == touchedEdgeData->polygonIndex) {
             lengths.erase(lengths.begin() + i);
             break;
         }
