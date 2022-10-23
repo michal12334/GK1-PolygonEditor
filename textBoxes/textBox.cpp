@@ -32,7 +32,16 @@ TextBox::~TextBox() {
 }
 
 void TextBox::update() {
-    text->setString(str + "|");
+    time += SPEED;
+    if(time >= TIME) {
+        time = 0;
+        isVisible = !isVisible;
+    }
+
+    if(isVisible)
+        text->setString(str + "|");
+    else
+        text->setString(str);
     for(int i = 0; i < keys.size(); i++) {
         if(!keys[i].isPressed && Keyboard::isKeyPressed(keys[i].key)) {
             keys[i].isPressed = true;

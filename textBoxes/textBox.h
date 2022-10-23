@@ -14,6 +14,11 @@ public:
     float getValue();
 
 private:
+    const float TIME = 0.5f;
+    const float SPEED = 0.1f;
+    float time = 0.0f;
+    bool isVisible = false;
+
     sf::Font font;
     sf::Text* text;
     std::string str;
