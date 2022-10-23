@@ -29,4 +29,5 @@ private:
     std::vector<Key> keys;
 
     float string2float(std::string str);
+    std::string float2string(float value);
 };

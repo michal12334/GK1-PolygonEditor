@@ -5,6 +5,7 @@ using namespace std;
 using namespace sf;
 
 TextBox::TextBox(float startLen, Vector2f position, unsigned int size) {
+    str = float2string(startLen);
     font.loadFromFile("fonts/FuzzyBubbles-Regular.ttf");
     text = new Text();
     text->setFont(font);
@@ -59,4 +60,10 @@ float TextBox::string2float(string str) {
     float result;
     stream >> result;
     return result;
+}
+
+string TextBox::float2string(float value) {
+    ostringstream stream;
+    stream << value;
+    return stream.str();
 }
