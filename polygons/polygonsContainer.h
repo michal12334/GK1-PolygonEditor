@@ -57,4 +57,5 @@ private:
 
     template<typename T>
     std::string numberToString(T num);
+    sf::Vector2f getVersor(sf::Vector2f a, sf::Vector2f b);
 };

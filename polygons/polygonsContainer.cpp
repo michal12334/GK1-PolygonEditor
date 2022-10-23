@@ -1,6 +1,7 @@
 #include "polygonsContainer.h"
 #include <iostream>
 #include <sstream>
+#include <cmath>
 
 using namespace sf;
 using namespace std;
@@ -132,6 +133,38 @@ bool PolygonsContainer::isSomethingSelected() {
 }
 
 void PolygonsContainer::setEdgeLength(TouchedEdgeData* touchedEdgeData, float len) {
+    auto pLengths = getLengthByPolygon(touchedEdgeData->polygonIndex);
+    auto points = polygons[touchedEdgeData->polygonIndex].getPoints();
+    if(pLengths.size() >= points.size() - 1)
+        return;
+    vector<Vector2f> newPoints;
+    for(int i = 0; i < points.size(); i++) {
+        newPoints.push_back(Vector2f(points[i].x, points[i].y));
+    }
+    pLengths.push_back(EdgeLength(touchedEdgeData->polygonIndex, touchedEdgeData->startPointIndex, len));
+    int index = touchedEdgeData->startPointIndex;
+    while(true) {
+        float l = -1;
+        for(int i = 0; i < pLengths.size(); i++) {
+            if(pLengths[i].edgeIndex == index) {
+                l = pLengths[i].len;
+                break;
+            }
+        }
+        if(l == -1) {
+            break;
+        }
+        auto versor = getVersor(newPoints[index], newPoints[(index + 1) % points.size()]);
+        auto vector = versor * l;
+        newPoints[index] = newPoints[(index + 1) % points.size()] + vector;
+
+        index = (index - 1 + newPoints.size()) % newPoints.size();
+    }
+
+    for(int i = 0; i < newPoints.size(); i++) {
+        polygons[touchedEdgeData->polygonIndex].updatePoint(i, Vector2i(newPoints[i].x, newPoints[i].y));
+    }
+
     lengths.push_back(EdgeLength(touchedEdgeData->polygonIndex, touchedEdgeData->startPointIndex, len));
 }
 
@@ -175,4 +208,10 @@ string PolygonsContainer::numberToString(T num) {
     ostringstream stream;
     stream << num;
     return stream.str();
+}
+
+Vector2f PolygonsContainer::getVersor(Vector2f a, Vector2f b) {
+    auto result = a - b;
+    float len = sqrt(result.x * result.x + result.y * result.y);
+    return result / len;
 }
