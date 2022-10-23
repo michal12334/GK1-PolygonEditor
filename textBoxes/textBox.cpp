@@ -6,6 +6,7 @@ using namespace sf;
 
 TextBox::TextBox(float startLen, Vector2f position, unsigned int size) {
     font.loadFromFile("fonts/FuzzyBubbles-Regular.ttf");
+    text = new Text();
     text->setFont(font);
     text->setPosition(position);
     text->setCharacterSize(size);
