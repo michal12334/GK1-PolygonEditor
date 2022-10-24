@@ -24,6 +24,9 @@ UpperPanel::UpperPanel(
     normalModeButton = new Button(buttonSize, Vector2f(padding, padding), 5);
     polygonEditModeButton = new Button(buttonSize, Vector2f(buttonSize.x + 2 * padding, padding), 5);
     relationAddModeButton = new Button(buttonSize, Vector2f(2 * buttonSize.x + 3 * padding, padding), 5);
+    normalModeButton->setText("N", Vector2f(8, 2), 20);
+    polygonEditModeButton->setText("E", Vector2f(10, 2), 20);
+    relationAddModeButton->setText("R", Vector2f(9, 2), 20);
 
     normalModeButton->setActive(true);
 }

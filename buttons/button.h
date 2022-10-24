@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <string>
 
 class Button : public sf::Drawable {
 public:
@@ -12,6 +13,7 @@ public:
     float getBottom();
     void setActive(bool active);
     bool isActive();
+    void setText(std::string str, sf::Vector2f textPosition, unsigned int size);
 
 private:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
@@ -25,4 +27,7 @@ private:
     sf::RectangleShape borderUp;
     sf::RectangleShape borderBottom;
     bool active;
+
+    sf::Font font;
+    sf::Text text;
 };

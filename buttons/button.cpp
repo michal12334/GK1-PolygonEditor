@@ -1,6 +1,7 @@
 #include "button.h"
 
 using namespace sf;
+using namespace std;
 
 Button::Button(Vector2f size, Vector2f position, int borderSize) {
     this->size = size;
@@ -21,6 +22,9 @@ Button::Button(Vector2f size, Vector2f position, int borderSize) {
     borderUp.setSize(Vector2f(size.x, borderSize));
     borderUp.setPosition(position);
     borderUp.setFillColor(Color::Black);
+    font.loadFromFile("fonts/FuzzyBubbles-Regular.ttf");
+    text.setFillColor(Color::Black);
+    text.setFont(font);
 }
 
 bool Button::isTouched(Window* window) {
@@ -55,8 +59,15 @@ bool Button::isActive() {
     return active;
 }
 
+void Button::setText(string str, Vector2f textPosition, unsigned int size) {
+    text.setString(str);
+    text.setPosition(textPosition + position);
+    text.setCharacterSize(size);
+}
+
 void Button::draw(RenderTarget &target, RenderStates states) const {
     target.draw(rectangle, states);
+    target.draw(text, states);
     if(active) {
         target.draw(borderLeft, states);
         target.draw(borderRight, states);
