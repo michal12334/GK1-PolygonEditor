@@ -1,0 +1,51 @@
+W programie istnieją 3 tryby:
+
+1. Tryb normalny (wchodzimy do niego przyciskiem N)
+    Jest to tryb tylko do odczytu, w którym możemy bezpiecznie oglądać wielokąty wiedząc, że niczego nie popsujemy.
+
+2. Tryb edycji (wchodzimy do niego przyciskiem E)
+    Ten tryb umożliwia nam tworzenie nowych wielokątów.
+    Także przesuwanie i usuwanie wierzchołków, krawędzi oraz całych wielokątów.
+
+    Aby utworzyć wielokąt musimy zacząć od naciśnięcia lewego przycisku myszy na pustym polu na białej planszy.
+    Spowoduje to utowrzenie punktu.
+    Następne punkty tworzymy klikając lewy przycisk myszy na białej planszy.
+    Aby dokończyć tworzenie wielokątu musimy nacisnąć na punkt początkowy.
+
+    Naciśnięcie lewego przycisku myszy, w momencie gdy kursor jest w kontakcie z obiektem (punktem, krawędzią lub wielkątem) spowoduje rozpoczęcie przesuwania obiektu.
+    Przesuwanie obiektu zakończy się, gdy puścimy lewy przycisk myszy.
+    Po zakończonym przesuwaniu, obiekt jest zaznaczony na zielono.
+
+    Taki (zielony) obiekt możemy usunąć przyciskiem delete.
+
+    Użycie prawego przycisku myszy wyłączy nam zielone podświetlenie.
+
+    Jeżeli kursor myszy jest w kontakcie z jakimś obiektem, obiekt ten jest podświetlany na czerwono (o ile żaden obiekt nie jest podświetlony na zielono).
+    Brak czerwonego podświetlenia spowodowany zielonym podświetleniem nie wyłącza nam funkcji przesuwania, tyle tylko, że nie wiemy jaki obiekt będziemy przesuwać.
+
+    Jeżeli jakaś krawędź jest zaznaczona na czerwono możemy stworzyć punkt na jej środku klikając prawy przycisk myszy.
+
+3. Tryb relacji (wchodzimy do niego przyciskiem R)
+    Ten tryb umożliwia nam tworzenie relacji.
+    Jeżeli kursor myszy jest w kontakcie z jakąś krawędzią, krawędź ta jest podświetlana na czerwono.
+    Wciskając lewy przycisk myszy zaczynamy ustawiać długość krawędzi.
+    W trakcie ustawiania długości krawędzi możemy edytować widoczną długość.
+    Ustawianie długości krawędzi kończymy przyciskiem enter.
+    Wciskając prawy przycisk myszy możemy usunąć długość krawędzi.
+    Ustawioną długość możemy edytować wciskając lewy przycisk myszy na danej krawędzi.
+    W danym wielokącie musi istnieć przynajmniej jedna krawędź bez ustawionej długości.
+
+
+Opis algorytmu:
+
+Przy przesuwaniu wierzchołka poprawiamy kolejne krawędzie zaczynając od krawędzi pierwszej krawędzi wychodzącej z wierzchołka.
+Jeżeli natrafimy na krawędź z niepoprawną długością poprawiamy ją przez przesunięcie drugiego końca krawędzi (tego jeszcze nie ruszanego), tak aby nie zmienić kierunku krawędzi.
+Wektor między punktami A i B obliczamy jako AB = AB / |AB| * length i ustawiamy pozycję punktu B jako B = A + AB.
+Jeżeli natrafimy na krawędź bez ustawionej długości kończymy.
+Analogicznie poprawiamy krawędzie zaczynając od drugiej krawędzi wychodzącej z przesuwanego wierzchołka.
+Dzięki założeniu, że każdy wielokąt ma przynajmniej jedną krawędź bez ustalonej długości, wiemy, że startując z różnych krawędzi wychodzących z przesuwanego wierchołka nie natrafimy 2 razy na tą samą krawędź.
+
+Przy przesuwaniu krawędzi poprawiamy krawędzie analogicznie.
+
+Przy nadawaniu, bądź edycji długości przesuwamy jeden z punktów krawędzi zgodnie z opisanym wyżej wzorem, tak, aby krawędź miała odpowiednią długość.
+A następnie w analogiczny (do przsuwania wierchołka) sposób poprwiamy długości pozostałych krawędzi.
