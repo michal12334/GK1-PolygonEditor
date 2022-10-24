@@ -23,6 +23,7 @@ private:
     bool isMouseOnCanvas(sf::Vector2i mousePositionOnCanvas);
 
     bool isMouseLeftButtonPressed = false;
+    bool isMouseRightButtonPressed = false;
     bool isEnterKeyPressed = false;
 
     sf::Window* window;

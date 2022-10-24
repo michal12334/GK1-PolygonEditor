@@ -56,6 +56,15 @@ void RelationUsingMode::update() {
         isMouseLeftButtonPressed = false;
     }
 
+    if(!isMouseRightButtonPressed && Mouse::isButtonPressed(Mouse::Button::Right)) {
+        isMouseRightButtonPressed = true;
+        if(touchedEdgeData != nullptr) {
+            polygonsContainer->removeEdgeLength(touchedEdgeData);
+        }
+    } else if(!Mouse::isButtonPressed(Mouse::Button::Right)) {
+        isMouseRightButtonPressed = false;
+    }
+
     if(!isEnterKeyPressed && Keyboard::isKeyPressed(Keyboard::Key::Enter)) {
         isEnterKeyPressed = true;
         if(textBox != nullptr) {
