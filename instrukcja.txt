@@ -48,4 +48,4 @@ Dzięki założeniu, że każdy wielokąt ma przynajmniej jedną krawędź bez u
 Przy przesuwaniu krawędzi poprawiamy krawędzie analogicznie.
 
 Przy nadawaniu, bądź edycji długości przesuwamy jeden z punktów krawędzi zgodnie z opisanym wyżej wzorem, tak, aby krawędź miała odpowiednią długość.
-A następnie w analogiczny (do przsuwania wierchołka) sposób poprwiamy długości pozostałych krawędzi.
+A następnie w analogiczny (do przsuwania wierchołka) sposób poprawiamy długości pozostałych krawędzi.
