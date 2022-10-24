@@ -243,7 +243,7 @@ void PolygonsContainer::drawLen(EdgeLength edgeLength) {
     Text* text = new Text();
     text->setFont(font);
     text->setCharacterSize(20);
-    text->setPosition(Vector2f(position.x, position.y));
+    text->setPosition(Vector2f(position.x, position.y) + canvas->getPosition());
     text->setString(numberToString(edgeLength.len));
     text->setFillColor(sf::Color::Black);
     canvas->drawNative(text);
