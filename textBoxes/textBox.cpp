@@ -24,7 +24,6 @@ TextBox::TextBox(float startLen, Vector2f position, unsigned int size) {
     keys.push_back(Key(Keyboard::Key::Num8, '8'));
     keys.push_back(Key(Keyboard::Key::Num9, '9'));
     keys.push_back(Key(Keyboard::Key::Period, '.'));
-    keys.push_back(Key(Keyboard::Key::Subtract, '-'));
     keys.push_back(Key(Keyboard::Key::BackSpace, '\0'));
 }
 
